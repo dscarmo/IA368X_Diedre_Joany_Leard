@@ -30,7 +30,7 @@ A proposta deste projeto é avaliar a performance de métodos de aprendizado de 
 ## Objetivos do projeto
 Utilizar aprendizado de máquina tradicional e aprendizado de máquina profundo na tentativa de predizer tempo de sobrevivência de pacientes com Glioma a partir dos dados de ressonância magnética e anotações manuais de tumores do BraTS 2020.
 
-![data](/assets/input.png)
+![data](./assets/input.png)
 *Figura 1: Visualização dos dados do BraTS de um sujeito. Estes dados serão entradas aos métodos propostos. As quatro modalidades são apresentadas, em ordem: FLAIR, T1, T1 com Contraste e T2. Também são exibidas na linha de baixo anotações manuais, em ordem: fundo, edema (DE), non-enhancing tumor (NET) e enhancing tumor (ET)*
 
 ## Recursos e Materiais
@@ -70,7 +70,7 @@ Para isso foram consideradas as seguintes características: volume do tumor, mé
 
 Para aplicação dos modelos de classificação os dados obtidos foram normalizados (média em zero, e desvio padrão 1). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os dados de teste ao final, sem qualquer modificação de seus parâmetros, onde foram analisados precisão, revocação (*recall*), f1-score e acurácia.
 
-(LEARD FIM)
+
 
 (REMOVER INICIO)
 
@@ -86,7 +86,7 @@ Para aplicação dos modelos de classificação os dados obtidos foram normaliza
 
 
 
-![image_all_1](./assets/img/image_all_1.png)
+
 
 
 
@@ -96,19 +96,23 @@ Para aplicação dos modelos de classificação os dados obtidos foram normaliza
 
 
 
-Descritor HOG
+Para extração do descritor HOG, optou-se pela aplicação apenas no tumor segmentado, uma vez que a resolução necessária para evidenciar o HOG numa imagem completa (Cérebro e tumor) requer uma maior resolução ([Figura 1](image_hog_1) e [Figura 2](tumor_hog_1))
 
-![image_hog_1](./assets/img/image_hog_1.png)
+|   ![image_hog_1](./assets/img/image_hog_1.png "Figura 1")    |
+| :----------------------------------------------------------: |
+| **Figura 1:** Imagem do cérebro segmentado com tumor e histograma de gradientes orientados |
+|   ![tumor_hog_1](./assets/img/tumor_hog_1.png "Figura 2")    |
+| Figura 2: Tumor segmentado e  seu histograma de gradientes orientados |
+
+Seguindo a mesma abordagem do descritor HOG, optou-se por extrair o descritor LBP apenas do tumor segmentado, conforme [Figura 3](tumo_lbp_1). Além disso, avaliou-se a aplicação do método PCA (*Principal Component Analisys*) para redução de dimensionalidade, mantendo a representatividade ao nível de 99%, contudo houve uma grande distorção no resultado, sendo então descartado a sua utilização.
+
+|    ![tumo_lbp_1](./assets/img/tumo_lbp_1.png "Figura 3")     |
+| :----------------------------------------------------------: |
+|  Figura 3: Tumor segmentado e apresentação do descrito LBP   |
+|         ![](./assets/img/image_lbp_2.png "Figura 4")         |
+| Figura 4: Tumor segmetado e apresentação do descritor LBP com utilização de PCA. |
 
 
-
-![tumor_hog_1](./assets/img/tumor_hog_1.png)
-
-
-
-Descrito Local Binary Pattern
-
-![tumo_lbp_1](./assets/img/tumo_lbp_1.png)
 
 
 
@@ -116,13 +120,13 @@ Descrito Local Binary Pattern
 
 ### Conjunto de dados obtidos
 
-A partir dos descritores de imagem processados e dos dados de idade do sujeito, foram gerados arquivos CSV para treino, validação e teste, conforme tabela abaixo.
+A partir dos descritores de imagem processados e dos dados de idade do sujeito, foram gerados arquivos três arquivos CSV para treino, validação e teste. Cada arquivo foi gerado com diferentes resoluções para obtenção do descritor, da menor resolução para maior resolução, conforme tabela abaixo.
 
-| Conjunto de dados | Pixels por célula (HOG) | Raio (LBP) | Número de Pontos (LBP) | Tempo    |
-| :---------------: | :---------------------: | :--------: | :--------------------: | -------- |
-|         0         |          (8,8)          |     3      |           8            | 02:00:00 |
-|         1         |          (8,8)          |     3      |           9            | 02:10:00 |
-|         2         |          (4,4)          |     3      |           12           | 04:30:00 |
+| Conjunto dos dados de Características | Pixels por célula (HOG) | Raio (LBP) | Número de Pontos (LBP) | Tempo    |
+| :-----------------------------------: | :---------------------: | :--------: | :--------------------: | -------- |
+|                   0                   |          (8,8)          |     3      |           8            | 02:00:00 |
+|                   1                   |          (8,8)          |     3      |           9            | 02:10:00 |
+|                   2                   |          (4,4)          |     3      |           12           | 04:30:00 |
 
 
 
