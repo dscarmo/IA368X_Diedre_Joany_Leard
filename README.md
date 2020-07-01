@@ -134,9 +134,9 @@ A partir dos descritores de imagem processados e dos dados de idade do sujeito, 
 
 
 
-### Resultados Modelo
+### Resultados dos modelos de classificação (descritores de imagem)
 
-| Modelo    | Acurácia Dataset 0                                           | Acurácia Dataset 1                                           | Acurácia Dataset 2                                           |
+| Modelo    | Acurácia Conjunto de dados 0                                 | Acurácia Conjunto de dados 1                                 | Acurácia Conjunto de dados 2                                 |
 | :-------- | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | **SVM**   | *Treino*: 0,93 <br />*Validação*: 0,57<br />*Teste*: 0,41<br /> | *Treino*: 0,93 <br />*Validação*: 0,43<br />*Teste*: 0,49<br /> | *Treino*: 0,55 <br />*Validação*: 0,52<br />*Teste*: 0,39<br /> |
 | **nuSVM** | *Treino*: 0,91 <br />*Validação*: 0,52 <br />*Teste*: 0,43 <br> | *Treino*: 0,90 <br />*Validação*: 0,38<br />*Teste*: 0,46<br /> | *Treino*: 0,91 <br />*Validação*: 0,57<br />*Teste*: 0,33<br /> |
