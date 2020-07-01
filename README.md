@@ -4,36 +4,37 @@
 # Predição de Sobrevivência em Pacientes com Tumor Cerebral
 
 ## Descrição Resumida do Projeto
-O diagnóstico de Tumor Cerebral frequentemente acompanha uma previsão de tempo de vida do paciente. A acurácia desta previsão pode melhorar a qualidade de vida antes do óbito, também chamada de qualidade de morte. Este Trabalho pretende experimentar com dados públicos de imagens de ressonância magnética com anotações de tumores cerebrais, com objetivo de prever com menor erro possível o tempo de sobrevivência dos pacientes. Para isso utilizaremos de modelos de aprendizado de máquina tradicionais e baseados em Aprendizado Profundo. Os dados incluem anotações do tempo que o paciente sobreviveu, que são usados como referência. Os melhores resultados encontrados foram de ?.
+O desafio Brain Tumor Segmentation Challenge (BraTS) contribui diretamente na provisão de dados públicos de ressonância magnética para pesquisa sobre tumor cerebrais, com diversas tarefas envolta da tarefa principal de segmentação dos tumores. Uma destas tarefas é a utilização de segmentações para estudar a possibilidade de predição de sobrevivência dos pacientes. O diagnóstico de Tumor Cerebral frequentemente acompanha uma previsão de tempo de vida do paciente, onde a acurácia desta previsão pelo médico pode melhorar a qualidade de vida antes do óbito, também chamada de qualidade de morte. Este trabalho pretende experimentar com os dados públicos do BraTS, com objetivo de prever com menor erro possível o tempo de sobrevivência dos pacientes, utilizando-se das segmentações manuais providas. Comparamos modelos de aprendizado de máquina tradicionais e baseados em Aprendizado Profundo. Os dados incluem anotações da idade e do tempo que o paciente sobreviveu, que são usados como referência. Os melhores resultados encontrados foram de ?.
 
 ## Abstract in English
-The diagnosis of Cerebral Tumor often accompanies a prediction of the patient's lifetime. The accuracy of this prediction can improve the quality of life before death, also called quality of death. This work intends to experiment with public data from magnetic resonance images with annotations of brain tumors, in order to predict the survival time of patients with the least possible error. For that, we will use traditional machine learning models based on Deep Learning. The data includes notes on how long the patient survived, which are used as a reference. The best results found were from?.
+The Brain Tumor Segmentation Challenge (BraTS) challenge directly contributes to the provision of public MRI data for brain tumor research, with several tasks surrounding the main task of tumor segmentation. One of these tasks is the use of segmentations to study the possibility of predicting patient survival. The diagnosis of Cerebral Tumor often accompanies a prediction of the patient's lifetime, where the accuracy of this prediction by the physician can improve the quality of life before death, also called quality of death. This work intends to experiment with the public data of BraTS, in order to predict the survival time of patients with the least possible error, using the manual segmentations provided. We compare traditional machine learning models based on Deep Learning. The data includes notes on patient's age survival in days, which is used as a reference. The best results found were from ?.
 
 ## Equipe
-Diedre Santos do Carmo - 211492
-
-Joany - ``
-
+Diedre Santos do Carmo - 211492\
+Joany - ``\
 Leard de Oliveira Fernandes - 98413
 
 ## Vídeo do Projeto
-<coloque um link para o vídeo apresentado o projeto.>
+[Vídeo Proposta Inicial](https://drive.google.com/file/d/1-9-7oIXs2XLczSTYfaEmQVObxV8At7mw/view?usp=sharing)
 
 ## Introdução e Motivação
 Os tumores têm uma forma muito heterogênea, com diferentes graus e classificações associados. Devido a essa variação, o processamento automático de tumores cerebrais ainda é um desafio, seja para classificação, segmentação ou a tarefa específica deste trabalho, predição de sobrevivência.
 
-O Brain Tumor Segmentation Challenge (BraTS)(citação) é um desafio anual que provê dados públicos multi modalidade (FLAIR, T1, T1 com contraste e T2) com anotações manuais de segmentação dos Glioma, um tipo de tumor cerebral, presentes e tabelas de dias de sobrevivência dos pacientes dos quais as imagens foram adquiridas.
+O Brain Tumor Segmentation Challenge (BraTS)(citação) é um desafio anual que provê dados públicos multi modalidade (FLAIR, T1, T1 com contraste e T2) com anotações manuais de segmentação dos Glioma, um tipo de tumor cerebral. Também estão presentes tabelas de dias de sobrevivência dos pacientes dos quais as imagens foram adquiridas. A tarefa principal do BraTS é a de segmentação de tumores, usando segmentações manuais como referências. Outra das tarefas propostas pelo desafio envolve utilizar-se das segmentações para prever o tempo de sobrevivência do paciente.
 
-Com consciência de que estes métodos não substituiriam o profissional da saúde, mas podem servir de um auxílio na decisão média, exploramos dois caminhos metodológicos: aprendizado de maquina tradicional com [preencher Leard e Joany] e aprendizado profundo (citação), com utilização de redes convolucionais 3D (citação) com atenção (citação).
+A proposta deste projeto é avaliar a performance de métodos de aprendizado de máquina sobre a tarefa de prediçõ de sobrevivência, utilizando-se como entrada tanto das imagens de MRI como de anotações manuais do tumor, alem da idade do paciente. Com consciência de que estes métodos não substituiriam o profissional da saúde, mas podem servir de um auxílio na decisão média, exploramos dois caminhos metodológicos: aprendizado de maquina tradicional com baseando-se em features como LBP, HOG e volume do tumor, e aprendizado profundo utilizando redes neurais convolucionais (CNN) 3D, com mecanismos de atenção.
 
 ## Perguntas de Pesquisa
-É possvel predizer automaticamente o tempo de sobrevivência de um paciente com Glioma?
+É possvel predizer automaticamente o tempo de sobrevivência de um paciente com Glioma com métodos de aprendizado de máquina? Qual a diferença de performance entre aprendizado de máquina tradicional e profundo?
 
 ## Objetivos do projeto
-Utilizar aprendizado de máquina tradicional e aprendizado de máquina profundo na tentativa de predizer tempo de sobrevivência de pacientes com Glioma a partir dos dados do BraTS 2020.
+Utilizar aprendizado de máquina tradicional e aprendizado de máquina profundo na tentativa de predizer tempo de sobrevivência de pacientes com Glioma a partir dos dados de ressonância magnética e anotações manuais de tumores do BraTS 2020.
+
+![data](/assets/input.png)
+*Visualização dos dados do BraTS de um sujeito. Estes dados serão entradas aos métodos propostos. As quatro modalidades são apresentadas, em ordem: FLAIR, T1, T1 com Contraste e T2. Também são exibidas na linha de baixo anotações manuais, em ordem: fundo, edema (DE), non-enhancing tumor (NET) e enhancing tumor (ET)*
 
 ## Recursos e Materiais
-Bases de Dados
+
 BraTS 2020: https://www.med.upenn.edu/cbica/brats2020/ \
 **Diedre: Expandir essa seção**
 
