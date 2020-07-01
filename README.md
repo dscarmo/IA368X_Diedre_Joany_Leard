@@ -30,7 +30,7 @@ A proposta deste projeto é avaliar a performance de métodos de aprendizado de 
 ## Objetivos do projeto
 Utilizar aprendizado de máquina tradicional e aprendizado de máquina profundo na tentativa de predizer tempo de sobrevivência de pacientes com Glioma a partir dos dados de ressonância magnética e anotações manuais de tumores do BraTS 2020.
 
-![data](/assets/input.png)
+![data](./assets/img/input.png)
 *Figura 1: Visualização dos dados do BraTS de um sujeito. Estes dados serão entradas aos métodos propostos. As quatro modalidades são apresentadas, em ordem: FLAIR, T1, T1 com Contraste e T2. Também são exibidas na linha de baixo anotações manuais, em ordem: fundo, edema (DE), non-enhancing tumor (NET) e enhancing tumor (ET)*
 
 ## Recursos e Materiais
@@ -46,43 +46,72 @@ A tabela abaixo contêm ferramentas e bibliotecas utilizadas na implementação 
 | Ferramenta	| URL| 	Descrição|
 | --- | --- | --- |
 | Python 3| 	https://www.python.org/|	Linguagem de programação principal do projeto.|
-| Orange |  | Ferramenta gráfica para preparação de experimentos de visualização e aprendizado de máquina, baseada em Python. |
+| Orange | https://orange.biolab.si/ | Ferramenta gráfica para preparação de experimentos de visualização e aprendizado de máquina, baseada em Python. |
 |Google Colab|	https://colab.research.google.com|	Plataforma online para execução de notebooks estilo Jupyter, provendo GPU gratuita (tempo de uso limitado).|
 
 | Biblioteca | URL | Descrição |
 | --- | --- | --- |
-| Numpy |  | A base da maioria do processamento numérico em Python. |
-| Pandas |  | Oferece vários métodos para lidar com tabelas. |
+| Numpy | https://numpy.org/ | A base da maioria do processamento numérico em Python. |
+| Pandas | https://pandas.pydata.org/ | Oferece vários métodos para lidar com tabelas. |
 | Scikit-Learn | https://scikit-learn.org/stable/index.html | Implementações de diveros módulos para aplicações de Aprendizado de Máquina. |
-| MatPlotLib | | Biblioteca de visualização.|
-| NiBabel | | Provê métodos prontos para leitura e criação de imagens Nift, formato muito utilizado em trabalhos com imagens médicas. |
-| MLflow  | | Ferramenta para gerenciamento de workflow de trabalhos de Aprendizado de Máquina, usada aqui principalmente para logging. |
-| PyTorch | | Abstração de métodos para criação e avaliação de modelos de Aprendizado Profundo, usando operações em hardware (GPU). |
-| Pytorch Lightning | | Maior abstração sobre o PyTorch e provisão de templates para tarefas comuns de pesquisa em Aprendizado Profundo. |
+| MatPlotLib | https://matplotlib.org/| Biblioteca de visualização.|
+| NiBabel | https://nipy.org/nibabel/ | Provê métodos prontos para leitura e criação de imagens Nift, formato muito utilizado em trabalhos com imagens médicas. |
+| MLflow  | https://mlflow.org/ | Ferramenta para gerenciamento de workflow de trabalhos de Aprendizado de Máquina, usada aqui principalmente para logging. |
+| PyTorch | https://pytorch.org/ | Abstração de métodos para criação e avaliação de modelos de Aprendizado Profundo, usando operações em hardware (GPU). |
+| Pytorch Lightning | https://pytorch-lightning.readthedocs.io/en/latest/| Maior abstração sobre o PyTorch e provisão de templates para tarefas comuns de pesquisa em Aprendizado Profundo. |
 
 The used environment is the environment provided by Google Colaboratory. Note that some specially long CNN trainings had to be done in local GPUs, and unfortunately may not be reproducible in Colab due to time limitations. The only difference in local GPU usage was connecting Colab to a local Jupyter Kernel.
 
 ## Metodologia
 
+Esta seção contêm explanações dos dois principais caminhos metodológicos seguidos por esse trabalho: utilização de aprendizado de máquina tradicional e aprendizado profundo.
+
+Seguindo o padrão de avaliação do BraTS, a varíavel alvo de sobrevivência, em dias, é transformada em categórica para extração de métricas de classificação como acurácia. A conversão segue a Tabela (?):
+
+| Classe           | Sobrevivência         |
+| ---              | ---                   |
+| Short-survivor   |  < 300 dias           |
+| Mid-survivor     |>= 300 dias < 450 dias |
+| Long-survivor    |     >= 450 dias       |
+*Tabela (?): Esquema de conversão de dias de sobrevivência para variável categórica.*
+
+No método baseado em CNN, também é avaliada o MSE (mean squared error ou erro quadrátivo médio) comparado diretamente os valores de sobrevivência preditos com a anotação. No método tradicional, a otimização é realizada diretamente sobre as categorias.
+
+### Aprendizado de Máquina Tradicional
 Para realização do processo de classificação de sobrevivência do sujeito, foi utilizado além da idade os dados de imagem tumoral a partir de uma base dados de 236 sujeitos. Para avaliação, validação e teste o conjunto disponibilizado foi dividido em 169 sujeitos para treino, 21 sujeitos para validação e 46 sujeitos para teste. As bases de treino e validação foram utilizadas para seleção dos melhores parâmetros e modelos utilizados no processo de classificação das imagens. As imagens disponibilizadas foram processadas no Colab utilizando a linguagem Python e o conjunto de bibliotecas Scikit-Learn, Numpy e Pandas para extração dos características da imagem. Além disso, foi utilizado o Orange para realizar a visualização das características obtidas.
 
 Para isso foram consideradas as seguintes características: volume do tumor, média do histograma de vetores orientados (HOG), média do histograma do padrão binário local (LBP), 10 bins do histograma HOG, e 10 bins do histograma LBP. Para todas as características de imagem, foram analisados o corpo sólido do tumor e o corpo necrosado do tumor (menor em volume), além disso foram considerados os 4 tipos de imagens disponibilizadas (T1, T1Gd, T2 e T2-FLAIR). Assim, foi possível totalizar 162 características da imagem para composição da classificação.
 
 Para aplicação dos modelos de classificação os dados obtidos foram normalizados (média em zero, e desvio padrão 1). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os dados de teste ao final, sem qualquer modificação de seus parâmetros, onde foram analisados precisão, revocação (*recall*), f1-score e acurácia.
 
-(LEARD FIM)
+### Aprendizado Profundo
 
-(REMOVER INICIO)
+Modelos de aprendizado profundo, especificamente redes neurais concolucionais (CNNs) contêm uma quantidade significativamente maior de parâmetros que o contido em redes neurais tradicionais. A rede tem capacidade de aprender diretamente dos dados, como dados de imagem, não somente de duas dimensões até de três dimensões. Em um breve resumo, um processo de otimização utilizando gradientes de uma função de perda que quantifica a performance da rede, atualiza todos os pesos das convoluções realizadas pela rede, que são seguidas de operações não lineares.
 
-<Abordagem/metodologia adotada, incluindo especificação de quais técnicas foram exploradas, tais como: aprendizagem de máquina, análise de redes, análise estatística, ou integração de uma ou mais técnicas.>
+![arch](/assets/img/arch.png) TODO
+*Figura (?): Diagrama da arquitetura da CNN3DAtt.*
 
-(REMOVER FIM)
+A arquitetura da rede utilizada aqui, chamada de CNNAtt3D, é inspirada em uma CNN baseada em mecanismo de atenção (CITAÇÃO). A rede produz de forma não supervisionadas mapeamentos em duas dimensões, utilizando-se da função de ativação Sigmoid, que funcionam como um mapa de calor e um "portão" que deixa passar somente as features convolucionais desejadas pela otimização. Em resumo a arquitetura realiza camadas convolucionais seguidas de operações não-lineares. Três camadas de atenção convergem em camadas totalmente conectadas. A conversão de features 2D para features 1D é realizada com Global Average Pooling, resultando em um valor de média por canal da saída do módulo de atenção. O valor de idade é adicionado nesta fase como um neurônio extra. A saída final consiste de um único neurônio.Este neurônio de saída é utilizado como ativação diretamente de dias de sobrevivência. A ativação deste neurônio é limitada entre 1 e 2000, utilizando-se de uma ativação Sigmoid. O intervalo foi escolhido baseando-se no intervalo observado nos datasets de treino e validação.
+
+Especificamente para o experimento com a CNN3DAtt, as quatro anotações foram transformadas em três anotações cumulativas para economia de memória, seguindo a Tabela (?):
+
+| Nova anotação    | Composta de       |
+| ---              | ---                   |
+| Whole Tumor    |  ED + NET + ET           |
+| Tumor Core     |  NET + ET |
+| ET  |  ET      |
+*Tabela ?: Esse esquema de anotação elimina o canal do background, focando completamente no tumor.*
+
+Tanto as imagens de MRI quanto as anotações do tumor são inseridas em conjunto, fundidas com uso de múltiplos canais. Quatro modalidades de MRI mais três canais da nova anotação resultam em sete canais de entrada. Data augmentation foi utilizado na forma de patches aleatórios 7x128x128x128 em tempo de treinamento, e variação aleatória de intensidade de 0.1. Em tempo de predição (validação ou teste), crops centrais 7x128x128x128 são utilizados. A função de perda escolhida foi a Smooth L1 Loss (citação), onde uma perda de erro absoluto linear (L1) é realizada enquanto o valor é maior que 1.0, e MSE é utilizada em valores menor que 1.0. Devido aos altos valores de sobrevivência em dias, efetivamente a perda se torna L1 Loss.
+
+Experimentos envolveram experimentar com alguns hiperparâmetros de treinamento e com a quantidade de canais das camadas da rede. Especificamente, batch size, learning rate, otimizador, precisão(treinamento com mixed-precision ou full-precision utilizando-se da biblioteca AMP (CITAÇÃO)) e a quantidade de canais por camada determinada por um fator compartilhado. O melhor conjunto de hiperparâmetros de treinamento foi escolhido para ser avaliado no conjunto de testes. Diversos experimentos que não chegaram a convergência não serão apresentados. Finalmente, os mapas de atenção são visualizados para verificar em quais localizações aproximadas a rede esta dando mais "atenção".
 
 ## Detalhamento do Projeto
-**Vamos colocar link pra notebooks aqui, com uma breve descrição**
+
+A seguir, links que levam as implementações da metodologia reportada neste relatório. Os notebooks são pontos de entrada para importação de outros códigos vindo de outras bibliotecas ou scripts presentes no Drive Compartilhado.
 
 **Notebook ML tradicional - Leard**\
-**Notebook CNN - Diedre**
+**[Notebook CNN](https://colab.research.google.com/drive/1IY-CMSZV-zriZP7jOq61AmR4f66XeqtI?usp=sharing)**
 
 
 
@@ -144,7 +173,7 @@ A partir dos descritores de imagem processados e dos dados de idade do sujeito, 
 
 
 
-### Resultados Modelo
+### Resultados Aprendizado de Maquina Tradicional
 
 | Modelo    | Acurácia Dataset 0                                           | Acurácia Dataset 1                                           | Acurácia Dataset 2                                           |
 | :-------- | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -154,19 +183,16 @@ A partir dos descritores de imagem processados e dos dados de idade do sujeito, 
 | **RF**    | *Treino*: 1,00 <br />*Validação*: 0,43<br />*Teste*: 0,37<br /> | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: 0,39<br /> | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: **0,41***<br /> |
 | **LF**    | *Treino*: 0,74 <br />*Validação*: 0,43<br />*Teste*: **0,47***<br /> | *Treino*: 0,72 <br />*Validação*: 0,43<br />*Teste*: **0,50***<br /> | *Treino*: 0,69 <br />*Validação*: 0,57<br />*Teste*: **0,43**<br /> |
 
-
-
-
-
-
+Leard, discutir resultados aqui
 
 (LEARD FIM)
 
+TODO tabela resultados CNN
 
+TODO graficos convergência CNN
 
-<Apresente os resultados da forma mais rica possível, com gráficos e tabelas. Mesmo que o seu código rode online em um notebook, copie para esta parte a figura estática. A referência a código e links para execução online pode ser feita aqui ou na seção de detalhamento do projeto (o que for mais pertinente).
+TODO visualização atenção CNN
 
-A discussão dos resultados também pode ser feita aqui na medida em que os resultados são apresentados ou em seção independente. Aspectos importantes a serem discutidos: É possível tirar conclusões dos resultados? Quais? Há indicações de direções para estudo? São necessários trabalhos mais profundos?>
 
 ## Conclusões
 <Apresente aqui as conclusões finais do trabalho e as lições aprendidas.>
@@ -184,3 +210,5 @@ CHANG, Chih-Chung; LIN, Chih-Jen. LIBSVM: A library for support vector machines.
 CRAMMER, Koby et al. Online passive-aggressive algorithms. **Journal of Machine Learning Research**, v. 7, n. Mar, p. 551-585, 2006.
 
 FAN, Rong-En et al. LIBLINEAR: A library for large linear classification. **Journal of machine learning research**, v. 9, n. Aug, p. 1871-1874, 2008.
+
+TODO referências CNN

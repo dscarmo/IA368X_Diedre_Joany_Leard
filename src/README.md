@@ -1,10 +1,10 @@
 # IA368X_Diedre_Joany_Leard
 Como este trabalho foi desenvolvido no Google Colaboratory, eventuais arquivos de código fonte estão na pasta "codebase" do Drive compartilhado.
 
-![drive](/assets/accessing_drive.png)
+![drive](/assets/img/accessing_drive.png)
 *Acesso ao drive compartilhado deste projeto.*
 
-![codebase](/assets/codebase.png)
+![codebase](/assets/img/codebase.png)
 *Nessa pasta alguns arquivos extras de manipulação de dados estão presentes.*
 
 Dos arquivos que serão encontrados na pasta codebase, é importante citar:
