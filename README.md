@@ -72,12 +72,6 @@ Para aplicação dos modelos de classificação os dados obtidos foram normaliza
 
 
 
-(REMOVER INICIO)
-
-<Abordagem/metodologia adotada, incluindo especificação de quais técnicas foram exploradas, tais como: aprendizagem de máquina, análise de redes, análise estatística, ou integração de uma ou mais técnicas.>
-
-(REMOVER FIM)
-
 ## Detalhamento do Projeto
 **Vamos colocar link pra notebooks aqui, com uma breve descrição**
 
@@ -94,29 +88,21 @@ Para aplicação dos modelos de classificação os dados obtidos foram normaliza
 
 ### Extração dos descritores de imagem
 
-
-
 Para extração do descritor HOG, optou-se pela aplicação apenas no tumor segmentado, uma vez que a resolução necessária para evidenciar o HOG numa imagem completa (Cérebro e tumor) requer uma maior resolução ([Figura 1](image_hog_1) e [Figura 2](tumor_hog_1))
 
 |   ![image_hog_1](./assets/img/image_hog_1.png "Figura 1")    |
 | :----------------------------------------------------------: |
 | **Figura 1:** Imagem do cérebro segmentado com tumor e histograma de gradientes orientados |
 |   ![tumor_hog_1](./assets/img/tumor_hog_1.png "Figura 2")    |
-| Figura 2: Tumor segmentado e  seu histograma de gradientes orientados |
+| **Figura 2:** Tumor segmentado e  seu histograma de gradientes orientados |
 
 Seguindo a mesma abordagem do descritor HOG, optou-se por extrair o descritor LBP apenas do tumor segmentado, conforme [Figura 3](tumo_lbp_1). Além disso, avaliou-se a aplicação do método PCA (*Principal Component Analisys*) para redução de dimensionalidade, mantendo a representatividade ao nível de 99%, contudo houve uma grande distorção no resultado, sendo então descartado a sua utilização.
 
 |    ![tumo_lbp_1](./assets/img/tumo_lbp_1.png "Figura 3")     |
 | :----------------------------------------------------------: |
-|  Figura 3: Tumor segmentado e apresentação do descrito LBP   |
+| **Figura 3:** Tumor segmentado e apresentação do descrito LBP |
 |         ![](./assets/img/image_lbp_2.png "Figura 4")         |
-| Figura 4: Tumor segmentado e apresentação do descritor LBP com utilização de PCA. |
-
-
-
-
-
-
+| **Figura 4:** Tumor segmentado e apresentação do descritor LBP com utilização de PCA. |
 
 ### Conjunto de dados obtidos
 
