@@ -75,21 +75,31 @@ Para isso foram consideradas as seguintes características: volume do tumor, mé
 
 Para aplicação dos modelos de classificação os dados obtidos foram normalizados (média em zero, e desvio padrão 1). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os dados de teste ao final, sem qualquer modificação de seus parâmetros, onde foram analisados precisão, revocação (*recall*), f1-score e acurácia.
 
-
-
-apenas um teste
-
-![](./assets/input.png)
-
 (LEARD FIM)
 
+(REMOVER INICIO)
+
 <Abordagem/metodologia adotada, incluindo especificação de quais técnicas foram exploradas, tais como: aprendizagem de máquina, análise de redes, análise estatística, ou integração de uma ou mais técnicas.>
+
+(REMOVER FIM)
 
 ## Detalhamento do Projeto
 **Vamos colocar link pra notebooks aqui, com uma breve descrição**
 
 **Notebook ML tradicional - Leard**\
 **Notebook CNN - Diedre**
+
+
+
+
+
+(LEARD INICIO)
+
+
+
+(LEARD FIM)
+
+
 
 <Apresente aqui detalhes da análise. Nesta seção ou na seção de Resultados podem aparecer destaques de código como indicado a seguir. Note que foi usada uma técnica de highlight de código, que envolve colocar o nome da linguagem na abertura de um trecho com `~~~`, tal como `~~~python`.
 
