@@ -38,16 +38,30 @@ BraTS 2020: https://www.med.upenn.edu/cbica/brats2020/ \
 **Diedre: Expandir essa seção**
 
 ## Ferramentas
-| Ferramenta	| URL| 	Descrição| 
+| Ferramenta	| URL| 	Descrição|
 | --- | --- | --- |
 | Python 3| 	https://www.python.org/|	Linguagem de programação principal do projeto.|
+| Scikit-Learn | https://scikit-learn.org/stable/index.html | Conjunto de ferramentas Python para aplicações em machine-learning |
+| Numpy |  |  |
+| Pandas |  |  |
 |Google Colab|	https://colab.research.google.com|	Plataforma online para execução de notebooks estilo Jupyter.|
 
 **Incluir bibliotecas aqui também?**
+
 ## Metodologia
 **Aqui descrevemos metodologia como se fosse um paper.**\
 **Features clássicas, extração e uso em SVM - Leard**\
 **CNN, regressão de sobrevivência, atenção -Diedre**
+
+
+
+(LEARD)
+
+Para realização do processo de classificação de sobrevivência do sujeito, foi utilizado além da idade os dados de imagem tumoral a partir de uma base dados de 236 sujeitos. Para avaliação, validação e teste o conjunto disponibilizado foi dividido em 169 sujeitos para treino, 21 sujeitos para validação e 46 sujeitos para teste. As bases de treino e validação foram utilizadas para seleção dos melhores parâmetros e modelos utilizados no processo de classificação das imagens.
+
+As imagens disponibilizadas foram processadas no Colab utilizando a linguagem Python e o conjunto de bibliotecas Scikit-Learn, Numpy e Pandas para extração dos características da imagem. Para isso foram consideradas as seguintes características: volume do tumor, média do histograma de vetores orientados (hog), média do histograma do padrão binário local (lbp), 10 bins do histograma hog, e 10 bins do histograma lbp. Para todas as características, foram caracterizados o corpo sólido do tumor e o corpo necrosado do tumor (menor em volume), além disso foram considerados os 4 tipos de imagens disponibilizadas (T1, T1Gd, T2 e T2-FLAIR). Assim, foi possível totalizar 162 características da imagem para composição da classificação.
+
+Para aplicação dos modelos de classificação os dados obtidos foram normalizados (média em zero, e desvio padrão 1). Foram considerados os seguintes modelos: Support Vector Machine, Passive Agressive Classifier, Random Forest e Logistic Regression. Para todos os modelos utilizados foi empregada a técnica de grid-search para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os dados de teste ao final, sem qualquer modificação de seus parâmetros.
 
 <Abordagem/metodologia adotada, incluindo especificação de quais técnicas foram exploradas, tais como: aprendizagem de máquina, análise de redes, análise estatística, ou integração de uma ou mais técnicas.>
 
@@ -58,7 +72,7 @@ BraTS 2020: https://www.med.upenn.edu/cbica/brats2020/ \
 **Notebook CNN - Diedre**
 
 <Apresente aqui detalhes da análise. Nesta seção ou na seção de Resultados podem aparecer destaques de código como indicado a seguir. Note que foi usada uma técnica de highlight de código, que envolve colocar o nome da linguagem na abertura de um trecho com `~~~`, tal como `~~~python`.
- 
+
 Os destaques de código devem ser trechos pequenos de poucas linhas, que estejam diretamente ligados a alguma explicação. Não utilize trechos extensos de código. Se algum código funcionar online (tal como um Jupyter Notebook), aqui pode haver links. No caso do Jupyter, preferencialmente para o Binder abrindo diretamente o notebook em questão.>
 df = pd.read_excel("/content/drive/My Drive/Colab Notebooks/dataset.xlsx");
 sns.set(color_codes=True);
@@ -72,7 +86,7 @@ Destacar progresso seguindo o que foi escrito nas atas de reunião.
 
 ## Resultados e Discussão
 <Apresente os resultados da forma mais rica possível, com gráficos e tabelas. Mesmo que o seu código rode online em um notebook, copie para esta parte a figura estática. A referência a código e links para execução online pode ser feita aqui ou na seção de detalhamento do projeto (o que for mais pertinente).
- 
+
 A discussão dos resultados também pode ser feita aqui na medida em que os resultados são apresentados ou em seção independente. Aspectos importantes a serem discutidos: É possível tirar conclusões dos resultados? Quais? Há indicações de direções para estudo? São necessários trabalhos mais profundos?>
 
 ## Conclusões
