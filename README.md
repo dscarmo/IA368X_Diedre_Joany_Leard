@@ -62,11 +62,15 @@ Para realização do processo de classificação de sobrevivência do sujeito, f
 
 Para isso foram consideradas as seguintes características: volume do tumor, média do histograma de vetores orientados (HOG), média do histograma do padrão binário local (LBP), 10 bins do histograma HOG, e 10 bins do histograma LBP. Para todas as características de imagem, foram analisados o corpo sólido do tumor e o corpo necrosado do tumor (menor em volume), além disso foram considerados os 4 tipos de imagens disponibilizadas (T1, T1Gd, T2 e T2-FLAIR). Assim, foi possível totalizar 162 características da imagem para composição da classificação, no quais foram gravados em arquivos CSV para treino, validação e teste, conforme tabela abaixo.
 
+
+
 | Conjunto de dados | Pixels por célula (HOG) | Raio (LBP) | Número de Pontos (LBP) | Tempo    |
 | :---------------: | :---------------------: | :--------: | :--------------------: | -------- |
 |         0         |          (8,8)          |     3      |           8            | 02:00:00 |
 |         1         |          (8,8)          |     3      |           9            | 02:10:00 |
 |         2         |          (4,4)          |     3      |           12           | 04:30:00 |
+
+
 
 Para aplicação dos modelos de classificação os dados obtidos foram normalizados (média em zero, e desvio padrão 1). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os dados de teste ao final, sem qualquer modificação de seus parâmetros, onde foram analisados precisão, revocação (*recall*), f1-score e acurácia.
 
