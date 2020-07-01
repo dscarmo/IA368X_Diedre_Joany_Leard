@@ -115,7 +115,7 @@ A seguir, links que levam as implementações da metodologia reportada neste rel
 
 
 
-![image_all_1](./assets/img/image_all_1.png)
+
 
 
 
@@ -123,35 +123,31 @@ A seguir, links que levam as implementações da metodologia reportada neste rel
 
 ### Extração dos descritores de imagem
 
+Para extração do descritor HOG, optou-se pela aplicação apenas no tumor segmentado, uma vez que a resolução necessária para evidenciar o HOG numa imagem completa (Cérebro e tumor) requer uma maior resolução ([Figura 1](./assets/img/image_hog_1.png) e [Figura 2](./assets/img/tumor_hog_1.png))
 
+|   ![image_hog_1](./assets/img/image_hog_1.png "Figura 1")    |
+| :----------------------------------------------------------: |
+| **Figura 1:** Imagem do cérebro segmentado com tumor e histograma de gradientes orientados |
+|   ![tumor_hog_1](./assets/img/tumor_hog_1.png "Figura 2")    |
+| **Figura 2:** Tumor segmentado e  seu histograma de gradientes orientados |
 
-Descritor HOG
+Seguindo a mesma abordagem do descritor HOG, optou-se por extrair o descritor LBP apenas do tumor segmentado, conforme [Figura 3](./assets/img/tumo_lbp_1.png). Além disso, avaliou-se a aplicação do método PCA (*Principal Component Analisys*) para redução de dimensionalidade, mantendo a representatividade ao nível de 99%, contudo houve uma grande distorção no resultado, sendo então descartado a sua utilização [Figura 4](./assets/img/image_lbp_2.png).
 
-![image_hog_1](./assets/img/image_hog_1.png)
-
-
-
-![tumor_hog_1](./assets/img/tumor_hog_1.png)
-
-
-
-Descrito Local Binary Pattern
-
-![tumo_lbp_1](./assets/img/tumo_lbp_1.png)
-
-
-
-
+|    ![tumo_lbp_1](./assets/img/tumo_lbp_1.png "Figura 3")     |
+| :----------------------------------------------------------: |
+| **Figura 3:** Tumor segmentado e apresentação do descrito LBP |
+|         ![](./assets/img/image_lbp_2.png "Figura 4")         |
+| **Figura 4:** Tumor segmentado e apresentação do descritor LBP com utilização de PCA. |
 
 ### Conjunto de dados obtidos
 
-A partir dos descritores de imagem processados e dos dados de idade do sujeito, foram gerados arquivos CSV para treino, validação e teste, conforme tabela abaixo.
+A partir dos descritores de imagem processados e dos dados de idade do sujeito, foram gerados arquivos três arquivos CSV para treino, validação e teste. Cada arquivo foi gerado com diferentes resoluções para obtenção do descritor, da menor resolução para maior resolução, conforme tabela abaixo.
 
-| Conjunto de dados | Pixels por célula (HOG) | Raio (LBP) | Número de Pontos (LBP) | Tempo    |
-| :---------------: | :---------------------: | :--------: | :--------------------: | -------- |
-|         0         |          (8,8)          |     3      |           8            | 02:00:00 |
-|         1         |          (8,8)          |     3      |           9            | 02:10:00 |
-|         2         |          (4,4)          |     3      |           12           | 04:30:00 |
+| Conjunto dos dados de Características | Pixels por célula (HOG) | Raio (LBP) | Número de Pontos (LBP) | Tempo    |
+| :-----------------------------------: | :---------------------: | :--------: | :--------------------: | -------- |
+|                   0                   |          (8,8)          |     3      |           8            | 02:00:00 |
+|                   1                   |          (8,8)          |     3      |           9            | 02:10:00 |
+|                   2                   |          (4,4)          |     3      |           12           | 04:30:00 |
 
 
 
@@ -173,9 +169,9 @@ A partir dos descritores de imagem processados e dos dados de idade do sujeito, 
 
 
 
-### Resultados Aprendizado de Maquina Tradicional
+### Resultados dos modelos de classificação (descritores de imagem)
 
-| Modelo    | Acurácia Dataset 0                                           | Acurácia Dataset 1                                           | Acurácia Dataset 2                                           |
+| Modelo    | Acurácia Conjunto de dados 0                                 | Acurácia Conjunto de dados 1                                 | Acurácia Conjunto de dados 2                                 |
 | :-------- | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | **SVM**   | *Treino*: 0,93 <br />*Validação*: 0,57<br />*Teste*: 0,41<br /> | *Treino*: 0,93 <br />*Validação*: 0,43<br />*Teste*: 0,49<br /> | *Treino*: 0,55 <br />*Validação*: 0,52<br />*Teste*: 0,39<br /> |
 | **nuSVM** | *Treino*: 0,91 <br />*Validação*: 0,52 <br />*Teste*: 0,43 <br> | *Treino*: 0,90 <br />*Validação*: 0,38<br />*Teste*: 0,46<br /> | *Treino*: 0,91 <br />*Validação*: 0,57<br />*Teste*: 0,33<br /> |
