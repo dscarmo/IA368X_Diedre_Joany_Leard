@@ -152,10 +152,10 @@ A discussão dos resultados também pode ser feita aqui na medida em que os resu
 
 
 
-CRAMMER, Koby et al. Online passive-aggressive algorithms. **Journal of Machine Learning Research**, v. 7, n. Mar, p. 551-585, 2006.
+BREIMAN, Leo. Random forests. **Machine learning**, v. 45, n. 1, p. 5-32, 2001.
 
 CHANG, Chih-Chung; LIN, Chih-Jen. LIBSVM: A library for support vector machines. **ACM transactions on intelligent systems and technology (TIST)**, v. 2, n. 3, p. 1-27, 2011.
 
-BREIMAN, Leo. Random forests. **Machine learning**, v. 45, n. 1, p. 5-32, 2001.
+CRAMMER, Koby et al. Online passive-aggressive algorithms. **Journal of Machine Learning Research**, v. 7, n. Mar, p. 551-585, 2006.
 
 FAN, Rong-En et al. LIBLINEAR: A library for large linear classification. **Journal of machine learning research**, v. 9, n. Aug, p. 1871-1874, 2008.
