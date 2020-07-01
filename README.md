@@ -115,9 +115,38 @@ Destacar progresso seguindo o que foi escrito nas atas de reunião.
 <Relate a evolução do projeto: possíveis problemas enfrentados e possíveis mudanças de trajetória. Relatar o processo para se alcançar os resultados é tão importante quanto os resultados.>
 
 ## Resultados e Discussão
+
+
+(LEARD INICIO)
+
+
+
+| Modelo    | Acurácia Dataset 0                                           | Acurácia Dataset 1                                           | Acurácia Dataset 2                                           |
+| :-------- | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **SVM**   | *Treino*: 0,93 <br />*Validação*: 0,57<br />*Teste*: 0,41<br /> | *Treino*: 0,93 <br />*Validação*: 0,43<br />*Teste*: 0,49<br /> | *Treino*: 0,55 <br />*Validação*: 0,52<br />*Teste*: 0,39<br /> |
+| **nuSVM** | *Treino*: 0,91 <br />*Validação*: 0,52 <br />*Teste*: 0,43 <br> | *Treino*: 0,90 <br />*Validação*: 0,38<br />*Teste*: 0,46<br /> | *Treino*: 0,91 <br />*Validação*: 0,57<br />*Teste*: 0,33<br /> |
+| **PAC**   | *Treino*: 0,67 <br />*Validação*: 0,38<br />*Teste*: **0,59**<br /> | *Treino*: 0,63 <br />*Validação*: 0,52<br />*Teste*: **0,54**<br /> | *Treino*: 0,63 <br />*Validação*: 0,43<br />*Teste*: 0,33<br /> |
+| **RF**    | *Treino*: 1,00 <br />*Validação*: 0,43<br />*Teste*: 0,37<br /> | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: 0,39<br /> | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: **0,41***<br /> |
+| **LF**    | *Treino*: 0,74 <br />*Validação*: 0,43<br />*Teste*: **0,47***<br /> | *Treino*: 0,72 <br />*Validação*: 0,43<br />*Teste*: **0,50***<br /> | *Treino*: 0,69 <br />*Validação*: 0,57<br />*Teste*: **0,43**<br /> |
+
+
+
+
+
+
+
+(LEARD FIM)
+
+
+
 <Apresente os resultados da forma mais rica possível, com gráficos e tabelas. Mesmo que o seu código rode online em um notebook, copie para esta parte a figura estática. A referência a código e links para execução online pode ser feita aqui ou na seção de detalhamento do projeto (o que for mais pertinente).
 
 A discussão dos resultados também pode ser feita aqui na medida em que os resultados são apresentados ou em seção independente. Aspectos importantes a serem discutidos: É possível tirar conclusões dos resultados? Quais? Há indicações de direções para estudo? São necessários trabalhos mais profundos?>
 
 ## Conclusões
 <Apresente aqui as conclusões finais do trabalho e as lições aprendidas.>
+
+
+
+## Referências
+
