@@ -86,9 +86,31 @@ Para aplicação dos modelos de classificação os dados obtidos foram normaliza
 
 
 
+![image_all_1](./assets/img/image_all_1.png)
+
+
+
 (LEARD INICIO)
 
 ### Extração dos descritores de imagem
+
+
+
+Descritor HOG
+
+![image_hog_1](./assets/img/image_hog_1.png)
+
+
+
+![tumor_hog_1](./assets/img/tumor_hog_1.png)
+
+
+
+Descrito Local Binary Pattern
+
+![tumo_lbp_1](./assets/img/tumo_lbp_1.png)
+
+
 
 
 
