@@ -35,7 +35,7 @@ Utilizar aprendizado de máquina tradicional e aprendizado de máquina profundo 
 
 ## Recursos e Materiais
 
-O conjunto de dados utilizado, do desafio BraTS 2020, contém 369 sujeitos com exames de ressonância magnética de quatro modalidades: T1, pós-contraste T1, T2 e volumes FLAIR (veja a Figura 1). Todos os exames são de gliomas de baixo ou alto grau (LGG / HGG), adquiridos com diferentes protocolos clínicos e vários scanners de várias instituições.Todos os sujeitos têm segmentações manuais, realizadas por um a quatro avaliadores, seguindo o mesmo protocolo, com a segmentação resultante sendo aprovada por profissionais experientes. neuro-radiologistas. As anotações compreendem o enhancing tumor (ET), o edema peritumoral (ED) e o núcleo tumoral necrótico e non enhancing tumor (NET), conforme descrito no último artigo de resumo do BraTS (CITAÇÃO).  Os dados fornecidos são distribuídos após o pré-processamento do BraTS: co-registro para o mesmo modelo anatômico, interpolação para a mesma resolução e remoção do crânio. Pré-processamento adicional segue o aplicado no trabalho do Isensee (CITAÇÃO): as imagens são subtraídas pela média e divididas pelo desvio padrão da região do cérebro e cortadas dentro do intervalo de -5 a 5. Por fim, elas são min-max normalizadas até o intervalo de 0 a 1. As anotações são organizados de maneira exclusiva, incluindo plano de fundo, resultando em quatro canais (plano de fundo, ED, NET e ET). Informações de idade e sobrevivência, o alvo desta pesquisa, também são incluídas.
+O conjunto de dados utilizado, do desafio BraTS 2020, contém 369 sujeitos com exames de ressonância magnética de quatro modalidades: T1, pós-contraste T1, T2 e volumes FLAIR (veja a Figura 1). Todos os exames são de gliomas de baixo ou alto grau (LGG / HGG), adquiridos com diferentes protocolos clínicos e vários scanners de várias instituições.Todos os sujeitos têm segmentações manuais, realizadas por um a quatro avaliadores, seguindo o mesmo protocolo, com a segmentação resultante sendo aprovada por profissionais experientes. neuro-radiologistas. As anotações compreendem o *enhancing tumor* (ET), o edema peritumoral (ED) e o núcleo tumoral necrótico e *non enhancing tumor* (NET), conforme descrito no último artigo de resumo do BraTS (CITAÇÃO).  Os dados fornecidos são distribuídos após o pré-processamento do BraTS: co-registro para o mesmo modelo anatômico, interpolação para a mesma resolução e remoção do crânio. Pré-processamento adicional segue o aplicado no trabalho do Isensee (CITAÇÃO): as imagens são subtraídas pela média e divididas pelo desvio padrão da região do cérebro e cortadas dentro do intervalo de -5 a 5. Por fim, elas são min-max normalizadas até o intervalo de 0 a 1. As anotações são organizados de maneira exclusiva, incluindo plano de fundo, resultando em quatro canais (plano de fundo, ED, NET e ET). Informações de idade e sobrevivência, o alvo desta pesquisa, também são incluídas.
 
 
 Este artigo dividirá os dados de treinamento do desafio (depois de aleatórizar com semente fixa) em uma abordagem de hold-out de 70% de treinamento, 10% de validação e 20% para o treinamento. Sujeitos que não tem informação de sobrevivência foram removidos, resultando em 169 treinamentos, 21 em validação e 46 sujeitos de teste de um total de 236 sujeitos com informação de sobrevivência. Todos esses sujeitos tem Glioma do tipo HGG.
@@ -85,10 +85,37 @@ Para aplicação dos modelos de classificação os dados obtidos foram normaliza
 **Notebook CNN - Diedre**
 
 
+
+(LEARD INICIO)
+
+### Extração dos descritores de imagem
+
+
+
+### Conjunto de dados obtidos
+
+A partir dos descritores de imagem processados e dos dados de idade do sujeito, foram gerados arquivos CSV para treino, validação e teste, conforme tabela abaixo.
+
+| Conjunto de dados | Pixels por célula (HOG) | Raio (LBP) | Número de Pontos (LBP) | Tempo    |
+| :---------------: | :---------------------: | :--------: | :--------------------: | -------- |
+|         0         |          (8,8)          |     3      |           8            | 02:00:00 |
+|         1         |          (8,8)          |     3      |           9            | 02:10:00 |
+|         2         |          (4,4)          |     3      |           12           | 04:30:00 |
+
+
+
+(LEARD FIM)
+
+
+
+
 ## Evolução do Projeto
 <Relate a evolução do projeto: possíveis problemas enfrentados e possíveis mudanças de trajetória. Relatar o processo para se alcançar os resultados é tão importante quanto os resultados.>
 
 ## Resultados e Discussão
+
+
+
 
 
 (LEARD INICIO)
