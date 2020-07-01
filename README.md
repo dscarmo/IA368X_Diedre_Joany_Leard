@@ -11,7 +11,9 @@ The diagnosis of Cerebral Tumor often accompanies a prediction of the patient's 
 
 ## Equipe
 Diedre Santos do Carmo - 211492
+
 Joany - ``
+
 Leard de Oliveira Fernandes - 98413
 
 ## Vídeo do Projeto
