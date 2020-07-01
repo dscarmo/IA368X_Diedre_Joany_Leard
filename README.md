@@ -110,7 +110,7 @@ Seguindo a mesma abordagem do descritor HOG, optou-se por extrair o descritor LB
 | :----------------------------------------------------------: |
 |  Figura 3: Tumor segmentado e apresentação do descrito LBP   |
 |         ![](./assets/img/image_lbp_2.png "Figura 4")         |
-| Figura 4: Tumor segmetado e apresentação do descritor LBP com utilização de PCA. |
+| Figura 4: Tumor segmentado e apresentação do descritor LBP com utilização de PCA. |
 
 
 
