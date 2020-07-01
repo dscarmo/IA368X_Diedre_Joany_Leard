@@ -20,17 +20,17 @@ Leard de Oliveira Fernandes - 98413
 ## Introdução e Motivação
 Os tumores têm uma forma muito heterogênea, com diferentes graus e classificações associados. Devido a essa variação, o processamento automático de tumores cerebrais ainda é um desafio, seja para classificação, segmentação ou a tarefa específica deste trabalho, predição de sobrevivência.
 
-O Brain Tumor Segmentation Challenge (BraTS)(citação) é um desafio anual que provê dados públicos multi modalidade (FLAIR, T1, T1 com contraste e T2) com anotações manuais de segmentação dos Glioma, um tipo de tumor cerebral. Também estão presentes tabelas de dias de sobrevivência dos pacientes dos quais as imagens foram adquiridas. A tarefa principal do BraTS é a de segmentação de tumores, usando segmentações manuais como referências. Outra das tarefas propostas pelo desafio envolve utilizar-se das segmentações para prever o tempo de sobrevivência do paciente.
+O Brain Tumor Segmentation Challenge (BraTS)(citação) é um desafio anual que provê dados públicos multimodalidade (FLAIR, T1, T1 com contraste e T2) com anotações manuais de segmentação dos Glioma, um tipo de tumor cerebral. Também estão presentes tabelas de dias de sobrevivência dos pacientes dos quais as imagens foram adquiridas. A tarefa principal do BraTS é a de segmentação de tumores, usando segmentações manuais como referências. Outra das tarefas propostas pelo desafio envolve utilizar-se das segmentações para prever o tempo de sobrevivência do paciente.
 
-A proposta deste projeto é avaliar a performance de métodos de aprendizado de máquina sobre a tarefa de prediçõ de sobrevivência, utilizando-se como entrada tanto das imagens de MRI como de anotações manuais do tumor, alem da idade do paciente. Com consciência de que estes métodos não substituiriam o profissional da saúde, mas podem servir de um auxílio na decisão média, exploramos dois caminhos metodológicos: aprendizado de maquina tradicional com baseando-se em features como LBP, HOG e volume do tumor, e aprendizado profundo utilizando redes neurais convolucionais (CNN) 3D, com mecanismos de atenção.
+A proposta deste projeto é avaliar a performance de métodos de aprendizado de máquina sobre a tarefa de predições de sobrevivência, utilizando-se como entrada tanto das imagens de MRI como de anotações manuais do tumor, além da idade do paciente. Com consciência de que estes métodos não substituiriam o profissional da saúde, mas podem servir de um auxílio na decisão média, exploramos dois caminhos metodológicos: aprendizado de maquina tradicional com baseando-se em *features* como LBP, HOG e volume do tumor, e aprendizado profundo utilizando redes neurais convolucionais (CNN) 3D, com mecanismos de atenção.
 
 ## Perguntas de Pesquisa
-É possvel predizer automaticamente o tempo de sobrevivência de um paciente com Glioma com métodos de aprendizado de máquina? Qual a diferença de performance entre aprendizado de máquina tradicional e profundo?
+É possível predizer automaticamente o tempo de sobrevivência de um paciente com Glioma com métodos de aprendizado de máquina? Qual a diferença de performance entre aprendizado de máquina tradicional e profundo?
 
 ## Objetivos do projeto
 Utilizar aprendizado de máquina tradicional e aprendizado de máquina profundo na tentativa de predizer tempo de sobrevivência de pacientes com Glioma a partir dos dados de ressonância magnética e anotações manuais de tumores do BraTS 2020.
 
-![data](/assets/input.png)
+![data](./assets/input.png)
 *Visualização dos dados do BraTS de um sujeito. Estes dados serão entradas aos métodos propostos. As quatro modalidades são apresentadas, em ordem: FLAIR, T1, T1 com Contraste e T2. Também são exibidas na linha de baixo anotações manuais, em ordem: fundo, edema (DE), non-enhancing tumor (NET) e enhancing tumor (ET)*
 
 ## Recursos e Materiais
@@ -57,7 +57,7 @@ BraTS 2020: https://www.med.upenn.edu/cbica/brats2020/ \
 
 
 
-(LEARD)
+(LEARD INICIO)
 
 Para realização do processo de classificação de sobrevivência do sujeito, foi utilizado além da idade os dados de imagem tumoral a partir de uma base dados de 236 sujeitos. Para avaliação, validação e teste o conjunto disponibilizado foi dividido em 169 sujeitos para treino, 21 sujeitos para validação e 46 sujeitos para teste. As bases de treino e validação foram utilizadas para seleção dos melhores parâmetros e modelos utilizados no processo de classificação das imagens. As imagens disponibilizadas foram processadas no Colab utilizando a linguagem Python e o conjunto de bibliotecas Scikit-Learn, Numpy e Pandas para extração dos características da imagem. Além disso, foi utilizado o Orange para realizar a visualização das características obtidas. 
 
@@ -76,6 +76,12 @@ Para isso foram consideradas as seguintes características: volume do tumor, mé
 Para aplicação dos modelos de classificação os dados obtidos foram normalizados (média em zero, e desvio padrão 1). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os dados de teste ao final, sem qualquer modificação de seus parâmetros, onde foram analisados precisão, revocação (*recall*), f1-score e acurácia.
 
 
+
+apenas um teste
+
+![](./assets/input.png)
+
+(LEARD FIM)
 
 <Abordagem/metodologia adotada, incluindo especificação de quais técnicas foram exploradas, tais como: aprendizagem de máquina, análise de redes, análise estatística, ou integração de uma ou mais técnicas.>
 
