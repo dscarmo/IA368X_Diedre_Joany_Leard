@@ -11,9 +11,7 @@ The Brain Tumor Segmentation Challenge (BraTS) challenge directly contributes to
 
 ## Equipe
 Diedre Santos do Carmo - 211492
-
 Joany do Socorro Santa Rosa Rodrigues - 264440
-
 Leard de Oliveira Fernandes - 98413
 
 ## Vídeo do Projeto
