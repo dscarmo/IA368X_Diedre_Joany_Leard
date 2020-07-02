@@ -4,14 +4,16 @@
 # Predição de Sobrevivência em Pacientes com Tumor Cerebral
 
 ## Descrição Resumida do Projeto
-O desafio Brain Tumor Segmentation Challenge (BraTS) contribui diretamente na provisão de dados públicos de ressonância magnética para pesquisa sobre tumor cerebrais, com diversas tarefas envolta da tarefa principal de segmentação dos tumores. Uma destas tarefas é a utilização de segmentações para estudar a possibilidade de predição de sobrevivência dos pacientes. O diagnóstico de Tumor Cerebral frequentemente acompanha uma previsão de tempo de vida do paciente, onde a acurácia desta previsão pelo médico pode melhorar a qualidade de vida antes do óbito, também chamada de qualidade de morte. Este trabalho pretende experimentar com os dados públicos do BraTS, com objetivo de prever com menor erro possível o tempo de sobrevivência dos pacientes, utilizando-se das segmentações manuais providas. Comparamos modelos de aprendizado de máquina tradicionais e baseados em Aprendizado Profundo. Os dados incluem anotações da idade e do tempo que o paciente sobreviveu, que são usados como referência. Os melhores resultados encontrados foram de ?.
+O desafio Brain Tumor Segmentation Challenge (BraTS) contribui diretamente na provisão de dados públicos de ressonância magnética para pesquisa sobre tumores cerebrais, com diversas tarefas envolta da segmentação dos tumores. Uma destas, é a utilização de segmentações para estudar a possibilidade de predição de sobrevivência dos pacientes. O diagnóstico de Tumor Cerebral frequentemente acompanha uma previsão de tempo de vida do paciente, onde a acurácia desta previsão pelo médico pode melhorar a qualidade de vida antes do óbito, também chamada de qualidade de morte. Este trabalho pretende experimentar com os dados públicos do BraTS, com objetivo de prever com menor erro possível o tempo de sobrevivência dos pacientes, utilizando-se das segmentações manuais providas. Comparamos modelos de aprendizado de máquina tradicionais e baseados em Aprendizado Profundo. Os dados incluem anotações da idade e do tempo que o paciente sobreviveu, que são usados como referência. Os melhores resultados encontrados foram de ?.
 
 ## Abstract in English
 The Brain Tumor Segmentation Challenge (BraTS) challenge directly contributes to the provision of public MRI data for brain tumor research, with several tasks surrounding the main task of tumor segmentation. One of these tasks is the use of segmentations to study the possibility of predicting patient survival. The diagnosis of Cerebral Tumor often accompanies a prediction of the patient's lifetime, where the accuracy of this prediction by the physician can improve the quality of life before death, also called quality of death. This work intends to experiment with the public data of BraTS, in order to predict the survival time of patients with the least possible error, using the manual segmentations provided. We compare traditional machine learning models based on Deep Learning. The data includes notes on patient's age survival in days, which is used as a reference. The best results found were from ?.
 
 ## Equipe
-Diedre Santos do Carmo - 211492\
-Joany do Socorro Santa Rosa Rodrigues - 264440\
+Diedre Santos do Carmo - 211492
+
+Joany do Socorro Santa Rosa Rodrigues - 264440
+
 Leard de Oliveira Fernandes - 98413
 
 ## Vídeo do Projeto
@@ -80,31 +82,31 @@ No método baseado em CNN, também é avaliada o MSE (*mean squared error* ou er
 ### Aprendizado de Máquina Tradicional
 Para a realização do processo de classificação de sobrevivência do sujeito, foram utilizados a idade e os descritores da imagem tumoral a partir de uma base de dados de 236 sujeitos. Para avaliação, validação e teste o conjunto disponibilizado foi dividido em 169 sujeitos para treino, 21 sujeitos para validação e 46 sujeitos para teste. As bases de treino e validação foram utilizadas para seleção dos melhores parâmetros e modelos utilizados no processo de classificação das imagens. As imagens disponibilizadas foram processadas no Colab utilizando a linguagem Python e o conjunto de bibliotecas Scikit-Learn, Numpy e Pandas para extração das características (descritores) da imagem. Além disso, foi utilizado o Orange para realizar a visualização das características obtidas.
 
-Para isso foram consideradas as seguintes características: volume do tumor, média do histograma de vetores orientados (HOG), média do histograma do padrão binário local (LBP), 10 bins do histograma HOG, e 10 bins do histograma LBP. Para todas as características de imagem, foram analisados o corpo sólido do tumor e o corpo necrosado do tumor (menor em volume), além disso foram considerados os 4 tipos de imagens disponibilizadas (T1, T1Gd, T2 e T2-FLAIR). Assim, foi possível totalizar 162 características da imagem para composição da classificação.
+Para a extração dos descritores foram consideradas as seguintes características: volume do tumor, média do histograma de vetores orientados (HOG), média do histograma do padrão binário local (LBP), 10 bins do histograma HOG e 10 bins do histograma LBP. Para todas as características de imagem, foram analisados o corpo sólido e o corpo necrosado do tumor (menor em volume), além disso foram considerados os 4 tipos de imagens disponibilizadas (T1, T1Gd, T2 e T2-FLAIR). Assim, foi possível totalizar 162 características da imagem para composição da classificação.
 
-Para aplicação dos modelos de classificação os dados obtidos foram normalizados (![formula](https://render.githubusercontent.com/render/math?math=$\mu=0, \sigma=1$)). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os dados de teste ao final, sem qualquer modificação de seus parâmetros, onde foram analisados precisão, revocação (*recall*), f1-score e acurácia.
+Para aplicação dos modelos de classificação os dados obtidos foram normalizados (![formula](https://render.githubusercontent.com/render/math?math=$\mu=0, \sigma=1$)). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os conjuntos de características das imagens de teste sem qualquer modificação de seus parâmetros (apenas no treino/validação), onde foram analisados precisão, revocação (*recall*), f1-score e acurácia.
 
 #### Extração dos descritores de imagem
 
-Para extração do descritor HOG, optou-se pela aplicação apenas no tumor segmentado, uma vez que a resolução necessária para evidenciar o HOG numa imagem completa (Cérebro e tumor) requer uma maior resolução ([Figura 1](./assets/img/image_hog_1.png) e [Figura 2](./assets/img/tumor_hog_1.png))
+Para a extração do descritor HOG, optou-se pela aplicação apenas no tumor segmentado, uma vez que a resolução necessária para evidenciar o HOG numa imagem completa (cérebro e tumor) requer uma maior resolução ([Figura 1](./assets/img/image_hog_1.png) e [Figura 2](./assets/img/tumor_hog_1.png)).
 
 |   ![image_hog_1](./assets/img/image_hog_1.png "Figura 1")    |
 | :----------------------------------------------------------: |
 | **Figura 1:** Imagem do cérebro segmentado com tumor e histograma de gradientes orientados |
 |   ![tumor_hog_1](./assets/img/tumor_hog_1.png "Figura 2")    |
-| **Figura 2:** Tumor segmentado e  seu histograma de gradientes orientados |
+| **Figura 2:** Tumor segmentado e  seu histograma de gradientes orientados. |
 
 Seguindo a mesma abordagem do descritor HOG, optou-se por extrair o descritor LBP apenas do tumor segmentado, conforme [Figura 3](./assets/img/tumo_lbp_1.png). Além disso, avaliou-se a aplicação do método PCA (*Principal Component Analisys*) para redução de dimensionalidade, mantendo a representatividade ao nível de 99%, contudo houve uma grande distorção no resultado, sendo então descartado a sua utilização [Figura 4](./assets/img/image_lbp_2.png).
 
 |    ![tumo_lbp_1](./assets/img/tumo_lbp_1.png "Figura 3")     |
 | :----------------------------------------------------------: |
-| **Figura 3:** Tumor segmentado e apresentação do descrito LBP |
+| **Figura 3:** Tumor segmentado e apresentação do descrito LBP. |
 |         ![](./assets/img/image_lbp_2.png "Figura 4")         |
 | **Figura 4:** Tumor segmentado e apresentação do descritor LBP com utilização de PCA. |
 
 #### Conjunto de características
 
-A partir dos descritores de imagem processados e dos dados de idade do sujeito, foram gerados arquivos três arquivos CSV para treino, validação e teste. Cada arquivo foi gerado com diferentes resoluções para obtenção do descritor, da menor resolução para maior resolução, conforme tabela abaixo.
+A partir dos descritores de imagem processados e dos dados de idade do sujeito, foram gerados três arquivos CSV para cada treino, validação e teste. Cada arquivo foi gerado com diferentes resoluções para obtenção do descritor, da menor resolução para maior resolução, conforme tabela abaixo.
 
 | Conjunto de Características | Pixels por célula (HOG) | Raio (LBP) | Número de Pontos (LBP) | Tempo    |
 | :-------------------------: | :---------------------: | :--------: | :--------------------: | -------- |
@@ -147,7 +149,7 @@ A seguir, links que levam as implementações da metodologia reportada neste rel
 ## Evolução do Projeto
 O processamento correto dos dados acumulou boa parte do desenvolvimento desse projeto, devido ao peso e complexidade de lidar com dados de quatro dimensões. Erros no processamento fizeram alguns experimentos iniciais serem perdidos. Especial atenção foi prestada a partir desses erros para que a divisão e processamento estivessem corretos, notando que o processamento de centenas de volumes tri-dimensionais também requer alto poder computacional.
 
-Um fator limitante para escolha do modelo de classificação empregado na análise dos descritores de imagem foi relacionado ao tamanho amostral dos dados de treino, validação e teste. Uma vez que os dados disponibilizados estavam limitados ao conjunto disponibilizado pelo desafio BraTS. Dessa forma, optou-se por utilizar diferentes modelos e após, treinamento e validação, realizar a avaliação dos dados de testes em todos os modelos. Além disso, procurou-se verificar diferentes conjuntos de dados em função da resolução de processamento dos descritores. Em função da limitação de Hardware e tempo de processamento, os dois principais descritores (HOG e LBP) apresentados na literatura foram utilizados.
+Um fator limitante para a escolha do modelo de classificação empregado na análise dos descritores de imagem foi relacionado ao tamanho amostral dos dados, uma vez que esses estavam limitados ao conjunto disponibilizado pelo desafio BraTS. Dessa forma, optou-se por utilizar diferentes modelos e, após treinamento e validação, realizar a avaliação dos dados de testes em todos os modelos. Além disso, procurou-se verificar diferentes conjuntos de dados em função da resolução de processamento dos descritores. Em função da limitação de Hardware e tempo de processamento, os dois principais descritores (HOG e LBP) apresentados na literatura foram utilizados.
 
 Em termos da aproximação baseada em aprendizado profundo, a maior limitação da realização de experimentos adicionais de hiperparâmetros envolveram a demora em encontrar um ajuste de parâmetros que convergisse. O problema aparenta ser de difícil conversão, especialmente pela decisão de treinar diretamente sobre o valor de sobrevivência em dias. Provavelmente com algum tipo de normalização da saída a convergência seria mais fácil, o que é planejado para trabalhos futuros relacionados.
 
@@ -157,9 +159,9 @@ Resultados e discussão das duas abordagens são apresentados separadamente nas 
 
 ### Resultados dos modelos de classificação baseados em descritores de imagem
 
-Todos os parâmetros escolhidos nos modelos avaliados passaram por validação cruzada (*20-fold cross validation*), ao final dos treinamentos os mesmos foram avaliados nos três conjuntos de teste para as três classes de sobrevivência (curta, média e longa). A melhor acurácia foi obtida no modelo PAC (Classificador passivo agressivo), alcançando 59% de acurácia no conjunto de características com menor resolução dos descritores de imagem obtidos.
+Todos os parâmetros escolhidos nos modelos avaliados passaram por validação cruzada (*20-fold cross validation*) e, ao final dos treinamentos, os mesmos foram avaliados nos três conjuntos de teste para as três classes de sobrevivência (curta, média e longa). A melhor acurácia foi obtida no modelo PAC (Classificador passivo agressivo), alcançando 59% de acurácia no conjunto de características com menor resolução dos descritores de imagem obtidos.
 
-| Modelo    | Acurácia Conjunto de características 0                       | Acurácia Conjunto de características 1                       | Acurácia Conjunto de características 2                       |
+| Modelo    | Acurácia conjunto de características 0                       | Acurácia conjunto de características 1                       | Acurácia conjunto de características 2                       |
 | :-------- | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | **SVM**   | *Treino*: 0,93 <br />*Validação*: 0,57<br />*Teste*: 0,41    | *Treino*: 0,93 <br />*Validação*: 0,43<br />*Teste*: **0,49\**** | *Treino*: 0,55 <br />*Validação*: 0,52<br />*Teste*: 0,39    |
 | **nuSVM** | *Treino*: 0,91 <br />*Validação*: 0,52 <br />*Teste*: 0,43   | *Treino*: 0,90 <br />*Validação*: 0,38<br />*Teste*: 0,46    | *Treino*: 0,91 <br />*Validação*: 0,57<br />*Teste*: 0,33    |
@@ -167,15 +169,15 @@ Todos os parâmetros escolhidos nos modelos avaliados passaram por validação c
 | **RF**    | *Treino*: 1,00 <br />*Validação*: 0,43<br />*Teste*: 0,37    | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: 0,39    | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: **0,41*** |
 | **LF**    | *Treino*: 0,74 <br />*Validação*: 0,43<br />*Teste*: **0,47*** | *Treino*: 0,72 <br />*Validação*: 0,43<br />*Teste*: **0,50*** | *Treino*: 0,69 <br />*Validação*: 0,57<br />*Teste*: **0,43** |
 
-Contudo é necessário avaliar a limitação do tamanho da base de dados e da distribuição de classes de sobrevivência. O que poderia explicar o baixo desempenho do modelo SVM na validação e teste, além de um possível *overfit* (apesar da validação cruzada durante o treinamento). Apesar do uso limitado de descritores de imagem (volume, HOG e LBP), o número de características é próximo ao tamanho do conjunto de dados, o que torna difícil sua análise quanto a robustez  (o que é significante no conjunto de treino, pode não ser na validação e testes).
+Contudo, é necessário avaliar a limitação do tamanho da base de dados e da distribuição de classes de sobrevivência. O que poderia explicar o baixo desempenho do modelo SVM na validação e teste, além de um possível *overfit* (apesar da validação cruzada durante o treinamento). Apesar do uso limitado de descritores de imagem (volume, HOG e LBP), o número de características é próximo ao tamanho do conjunto de dados, o que torna difícil sua análise quanto a robustez  (o que é significante no conjunto de treino, pode não ser na validação e testes).
 
 (NÃO SEI SE FICA OU SE TIRA)
 
-Abaixo temos um mapa de calor dos descritores de imagem obtidos, é possível verificar agrupamentos entre diferentes descritores em diferentes imagens. Assim, acredita-se que estas características (*features*) poderiam ser agregadas para reduzir a dimensionalidade dos dados avaliados.
+Abaixo temos um mapa de calor dos descritores de imagem obtidos em que é possível verificar agrupamentos entre diferentes descritores em imagens distintas. Assim, acredita-se que estas características (*features*) poderiam ser agregadas para reduzir a dimensionalidade dos dados avaliados.
 
 | <img src="./assets/img/heatmap.png" alt="heat_map"  /> |
 | :----------------------------------------------------: |
-|    Figura X: Mapa de calor dos descritores obtidos     |
+|    Figura X: Mapa de calor dos descritores obtidos.    |
 
 
 ### Resultados Aprendizado Profundo
