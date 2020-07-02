@@ -82,7 +82,7 @@ Para a realização do processo de classificação de sobrevivência do sujeito,
 
 Para a extração dos descritores foram consideradas as seguintes características: volume do tumor, média do histograma de vetores orientados (HOG), média do histograma do padrão binário local (LBP), 10 bins do histograma HOG e 10 bins do histograma LBP. Para todas as características de imagem, foram analisados o corpo sólido e o corpo necrosado do tumor (menor em volume), além disso foram considerados os 4 tipos de imagens disponibilizadas (T1, T1Gd, T2 e T2-FLAIR). Assim, foi possível totalizar 162 características da imagem para composição da classificação.
 
-Para aplicação dos modelos de classificação os dados obtidos foram normalizados (![img](http://www.sciweavers.org/tex2img.php?eq=%20%5Cmu%20%3D0%2C%20%20%5Csigma%20%3D1&bc=White&fc=Black&im=png&fs=12&ff=fourier&edit=0)). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os conjuntos de características das imagens de teste sem qualquer modificação de seus parâmetros (apenas no treino/validação), onde foram analisados precisão, revocação (*recall*), f1-score e acurácia.
+Para aplicação dos modelos de classificação os dados obtidos foram normalizados (![img](http://www.sciweavers.org/tex2img.php?eq=%20%5Cmu%20%3D0%2C%20%20%5Csigma%20%3D1&bc=White&fc=Black&im=png&fs=12&ff=fourier&edit=0)). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os conjuntos de características das imagens de teste sem qualquer modificação de seus parâmetros (apenas no treino/validação), onde foram analisados precisão, sensibilidade (*recall*), f1-score e acurácia.
 
 #### Extração dos descritores de imagem
 
@@ -157,15 +157,29 @@ Resultados e discussão das duas abordagens são apresentados separadamente nas 
 
 ### Resultados dos modelos de classificação baseados em descritores de imagem
 
-Todos os parâmetros escolhidos nos modelos avaliados passaram por validação cruzada (*20-fold cross validation*) e, ao final dos treinamentos, os mesmos foram avaliados nos três conjuntos de teste para as três classes de sobrevivência (curta, média e longa). A melhor acurácia foi obtida no modelo PAC (Classificador passivo agressivo), alcançando 59% de acurácia no conjunto de características com menor resolução dos descritores de imagem obtidos.
+Todos os parâmetros escolhidos nos modelos avaliados passaram por validação cruzada (*20-fold cross validation*) e, ao final dos treinamentos, os mesmos foram avaliados nos três conjuntos de teste para as três classes de sobrevivência (curta, média e longa). A melhor acurácia foi obtida no modelo PAC (Classificador passivo agressivo), alcançando 59% de acurácia no conjunto de características com menor resolução dos descritores de imagem obtidos. 
 
 | Modelo    | Acurácia conjunto de características 0                       | Acurácia conjunto de características 1                       | Acurácia conjunto de características 2                       |
 | :-------- | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **SVM**   | *Treino*: 0,93 <br />*Validação*: 0,57<br />*Teste*: 0,41    | *Treino*: 0,93 <br />*Validação*: 0,43<br />*Teste*: **0,49\**** | *Treino*: 0,55 <br />*Validação*: 0,52<br />*Teste*: 0,39    |
+| **SVM**   | *Treino*: 0,93 <br />*Validação*: 0,57<br />*Teste*: 0,41    | *Treino*: 0,93 <br />*Validação*: 0,43<br />*Teste*: **0,48\**** | *Treino*: 0,55 <br />*Validação*: 0,52<br />*Teste*: 0,39    |
 | **nuSVM** | *Treino*: 0,91 <br />*Validação*: 0,52 <br />*Teste*: 0,43   | *Treino*: 0,90 <br />*Validação*: 0,38<br />*Teste*: 0,46    | *Treino*: 0,91 <br />*Validação*: 0,57<br />*Teste*: 0,33    |
 | **PAC**   | *Treino*: 0,67 <br />*Validação*: 0,38<br />*Teste*: **0,59** | *Treino*: 0,63 <br />*Validação*: 0,52<br />*Teste*: **0,54** | *Treino*: 0,63 <br />*Validação*: 0,43<br />*Teste*: 0,33    |
 | **RF**    | *Treino*: 1,00 <br />*Validação*: 0,43<br />*Teste*: 0,37    | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: 0,39    | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: **0,41*** |
-| **LF**    | *Treino*: 0,74 <br />*Validação*: 0,43<br />*Teste*: **0,47*** | *Treino*: 0,72 <br />*Validação*: 0,43<br />*Teste*: **0,50*** | *Treino*: 0,69 <br />*Validação*: 0,57<br />*Teste*: **0,43** |
+| **LR**    | *Treino*: 0,74 <br />*Validação*: 0,43<br />*Teste*: **0,47*** | *Treino*: 0,72 <br />*Validação*: 0,43<br />*Teste*: **0,50*** | *Treino*: 0,69 <br />*Validação*: 0,57<br />*Teste*: **0,43** |
+
+
+
+Abaixo podemos observar os scores de precisão, sensibilidade e F1-score dos modelos com melhor performance para os conjuntos 0 e 1 de características. Em todos os casos observa-se uma baixa precisão do classificador de média sobrevivência, quando comparado aos outros dois, possivelmente isso se deve ao desbalanceamento da base de dados.
+
+| Modelo                  | Precisão                                             | Sensibilidade                                        | F1-Score                                             |
+| :---------------------- | :--------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| **PAC**<br />Conjunto 0 | *Curta*: 0,73 <br />*Média*: 0,43<br />*Longa*: 0,62 | *Curta*: 0,53 <br />*Média*: 0,50<br />*Longa*: 0,68 | *Curta*: 0,62 <br />*Média*: 0,46<br />*Longa*: 0,65 |
+| **PAC**<br />Conjunto 1 | *Curta*: 0,75 <br />*Média*: 0,50<br />*Longa*: 0,50 | *Curta*: 0,40<br />*Média*: 0,33<br />*Longa*: 0,79  | *Curta*: 0,52<br />*Média*: 0,40<br />*Longa*: 0,61  |
+| **LR**<br />Conjunto 0  | *Curta*: 0,67<br />*Média*: 0,22<br />*Longa*: 0,48  | *Curta*: 0,53<br />*Média*: 0,17<br />*Longa*: 0,63  | *Curta*: 0,59<br />*Média*: 0,19<br />*Longa*: 0,55  |
+| **LR**<br />Conjunto 1  | *Curta*: 0,62<br />*Média*: 0,29<br />*Longa*: 0,50  | *Curta*: 0,53<br />*Média*: 0,17<br />*Longa*: 0,68  | *Curta*: 0,57<br />*Média*: 0,45<br />*Longa*: 0,48  |
+| **SVM**<br />Conjunto 1 | *Curta*: 0,53 <br />*Média*: 0,29<br />*Longa*: 0,50 | *Curta*: 0,53<br />*Média*: 0,17<br />*Longa*: 0,63  | *Curta*: 0,48 <br />*Média*: 0,43<br />*Longa*: 0,46 |
+
+
 
 Contudo, é necessário avaliar a limitação do tamanho da base de dados e da distribuição de classes de sobrevivência. O que poderia explicar o baixo desempenho do modelo SVM na validação e teste, além de um possível *overfit* (apesar da validação cruzada durante o treinamento). Apesar do uso limitado de descritores de imagem (volume, HOG e LBP), o número de características é próximo ao tamanho do conjunto de dados, o que torna difícil sua análise quanto a robustez  (o que é significante no conjunto de treino, pode não ser na validação e testes).
 
