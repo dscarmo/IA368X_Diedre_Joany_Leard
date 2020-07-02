@@ -82,7 +82,35 @@ Para realização do processo de classificação de sobrevivência do sujeito, f
 
 Para isso foram consideradas as seguintes características: volume do tumor, média do histograma de vetores orientados (HOG), média do histograma do padrão binário local (LBP), 10 bins do histograma HOG, e 10 bins do histograma LBP. Para todas as características de imagem, foram analisados o corpo sólido do tumor e o corpo necrosado do tumor (menor em volume), além disso foram considerados os 4 tipos de imagens disponibilizadas (T1, T1Gd, T2 e T2-FLAIR). Assim, foi possível totalizar 162 características da imagem para composição da classificação.
 
-Para aplicação dos modelos de classificação os dados obtidos foram normalizados (média em zero, e desvio padrão 1). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os dados de teste ao final, sem qualquer modificação de seus parâmetros, onde foram analisados precisão, revocação (*recall*), f1-score e acurácia.
+Para aplicação dos modelos de classificação os dados obtidos foram normalizados (![formula](https://render.githubusercontent.com/render/math?math=$\mu=0, \sigma=1$)). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os dados de teste ao final, sem qualquer modificação de seus parâmetros, onde foram analisados precisão, revocação (*recall*), f1-score e acurácia.
+
+#### Extração dos descritores de imagem
+
+Para extração do descritor HOG, optou-se pela aplicação apenas no tumor segmentado, uma vez que a resolução necessária para evidenciar o HOG numa imagem completa (Cérebro e tumor) requer uma maior resolução ([Figura 1](./assets/img/image_hog_1.png) e [Figura 2](./assets/img/tumor_hog_1.png))
+
+|   ![image_hog_1](./assets/img/image_hog_1.png "Figura 1")    |
+| :----------------------------------------------------------: |
+| **Figura 1:** Imagem do cérebro segmentado com tumor e histograma de gradientes orientados |
+|   ![tumor_hog_1](./assets/img/tumor_hog_1.png "Figura 2")    |
+| **Figura 2:** Tumor segmentado e  seu histograma de gradientes orientados |
+
+Seguindo a mesma abordagem do descritor HOG, optou-se por extrair o descritor LBP apenas do tumor segmentado, conforme [Figura 3](./assets/img/tumo_lbp_1.png). Além disso, avaliou-se a aplicação do método PCA (*Principal Component Analisys*) para redução de dimensionalidade, mantendo a representatividade ao nível de 99%, contudo houve uma grande distorção no resultado, sendo então descartado a sua utilização [Figura 4](./assets/img/image_lbp_2.png).
+
+|    ![tumo_lbp_1](./assets/img/tumo_lbp_1.png "Figura 3")     |
+| :----------------------------------------------------------: |
+| **Figura 3:** Tumor segmentado e apresentação do descrito LBP |
+|         ![](./assets/img/image_lbp_2.png "Figura 4")         |
+| **Figura 4:** Tumor segmentado e apresentação do descritor LBP com utilização de PCA. |
+
+#### Conjunto de características
+
+A partir dos descritores de imagem processados e dos dados de idade do sujeito, foram gerados arquivos três arquivos CSV para treino, validação e teste. Cada arquivo foi gerado com diferentes resoluções para obtenção do descritor, da menor resolução para maior resolução, conforme tabela abaixo.
+
+| Conjunto de Características | Pixels por célula (HOG) | Raio (LBP) | Número de Pontos (LBP) | Tempo    |
+| :-------------------------: | :---------------------: | :--------: | :--------------------: | -------- |
+|              0              |          (8,8)          |     3      |           8            | 02:00:00 |
+|              1              |          (8,8)          |     3      |           9            | 02:10:00 |
+|              2              |          (4,4)          |     3      |           12           | 04:30:00 |
 
 ### Aprendizado Profundo
 
@@ -106,6 +134,8 @@ Tanto as imagens de MRI quanto as anotações do tumor são inseridas em conjunt
 
 Experimentos envolveram experimentar com alguns hiperparâmetros de treinamento e com a quantidade de canais das camadas da rede. Especificamente, batch size, learning rate, otimizador, precisão(treinamento com mixed-precision ou full-precision utilizando-se da biblioteca AMP (CITAÇÃO)) e a quantidade de canais por camada determinada por um fator compartilhado. O melhor conjunto de hiperparâmetros de treinamento foi escolhido para ser avaliado no conjunto de testes. Diversos experimentos que não chegaram a convergência não serão apresentados. Finalmente, os mapas de atenção são visualizados para verificar em quais localizações aproximadas a rede esta dando mais "atenção".
 
+
+
 ## Detalhamento do Projeto
 
 A seguir, links que levam as implementações da metodologia reportada neste relatório. Os notebooks são pontos de entrada para importação de outros códigos vindo de outras bibliotecas ou scripts presentes no Drive Compartilhado.
@@ -118,46 +148,14 @@ A seguir, links que levam as implementações da metodologia reportada neste rel
 
 
 
-
-(LEARD INICIO)
-
-### Extração dos descritores de imagem
-
-Para extração do descritor HOG, optou-se pela aplicação apenas no tumor segmentado, uma vez que a resolução necessária para evidenciar o HOG numa imagem completa (Cérebro e tumor) requer uma maior resolução ([Figura 1](./assets/img/image_hog_1.png) e [Figura 2](./assets/img/tumor_hog_1.png))
-
-|   ![image_hog_1](./assets/img/image_hog_1.png "Figura 1")    |
-| :----------------------------------------------------------: |
-| **Figura 1:** Imagem do cérebro segmentado com tumor e histograma de gradientes orientados |
-|   ![tumor_hog_1](./assets/img/tumor_hog_1.png "Figura 2")    |
-| **Figura 2:** Tumor segmentado e  seu histograma de gradientes orientados |
-
-Seguindo a mesma abordagem do descritor HOG, optou-se por extrair o descritor LBP apenas do tumor segmentado, conforme [Figura 3](./assets/img/tumo_lbp_1.png). Além disso, avaliou-se a aplicação do método PCA (*Principal Component Analisys*) para redução de dimensionalidade, mantendo a representatividade ao nível de 99%, contudo houve uma grande distorção no resultado, sendo então descartado a sua utilização [Figura 4](./assets/img/image_lbp_2.png).
-
-|    ![tumo_lbp_1](./assets/img/tumo_lbp_1.png "Figura 3")     |
-| :----------------------------------------------------------: |
-| **Figura 3:** Tumor segmentado e apresentação do descrito LBP |
-|         ![](./assets/img/image_lbp_2.png "Figura 4")         |
-| **Figura 4:** Tumor segmentado e apresentação do descritor LBP com utilização de PCA. |
-
-### Conjunto de dados obtidos
-
-A partir dos descritores de imagem processados e dos dados de idade do sujeito, foram gerados arquivos três arquivos CSV para treino, validação e teste. Cada arquivo foi gerado com diferentes resoluções para obtenção do descritor, da menor resolução para maior resolução, conforme tabela abaixo.
-
-| Conjunto dos dados de Características | Pixels por célula (HOG) | Raio (LBP) | Número de Pontos (LBP) | Tempo    |
-| :-----------------------------------: | :---------------------: | :--------: | :--------------------: | -------- |
-|                   0                   |          (8,8)          |     3      |           8            | 02:00:00 |
-|                   1                   |          (8,8)          |     3      |           9            | 02:10:00 |
-|                   2                   |          (4,4)          |     3      |           12           | 04:30:00 |
-
-
-
-(LEARD FIM)
-
-
-
-
 ## Evolução do Projeto
 <Relate a evolução do projeto: possíveis problemas enfrentados e possíveis mudanças de trajetória. Relatar o processo para se alcançar os resultados é tão importante quanto os resultados.>
+
+
+
+Um fator limitante para escolha do modelo de classificação empregado na análise dos descritores de imagem foi relacionado ao tamanho amostral dos dados de treino, validação e teste. Uma vez que os dados disponibilizados estavam limitados ao conjunto disponibilizado pelo desafio BraTS. Dessa forma, optou-se por utilizar diferentes modelos e após, treinamento e validação, realizar a avaliação dos dados de testes em todos os modelos. Além disso, procurou-se verificar diferentes conjuntos de dados em função da resolução de processamento dos descritores. Em função da limitação de Hardware e tempo de processamento, os dois principais descritores (HOG e LBP) apresentados na literatura foram utilizados.
+
+
 
 ## Resultados e Discussão
 
