@@ -140,7 +140,8 @@ Experimentos envolveram experimentar com alguns hiperparâmetros de treinamento 
 
 A seguir, links que levam as implementações da metodologia reportada neste relatório. Os notebooks são pontos de entrada para importação de outros códigos vindo de outras bibliotecas ou scripts presentes no Drive Compartilhado.
 
-**Notebook ML tradicional - Leard**\
+**[Notebook extração de features](./notebooks/Process_and_Extract_Features_MRI.ipynb) **
+
 **[Notebook CNN](https://colab.research.google.com/drive/1IY-CMSZV-zriZP7jOq61AmR4f66XeqtI?usp=sharing)**
 
 
