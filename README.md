@@ -66,14 +66,13 @@ The used environment is the environment provided by Google Colaboratory. Note th
 
 Esta seção contêm explanações dos dois principais caminhos metodológicos seguidos por esse trabalho: utilização de aprendizado de máquina tradicional e aprendizado profundo.
 
-Seguindo o padrão de avaliação do BraTS, a varíavel alvo de sobrevivência, em dias, é transformada em categórica para extração de métricas de classificação como acurácia. A conversão segue a Tabela (?):
+Seguindo o padrão de avaliação do BraTS, a varíavel alvo de sobrevivência, em dias, é transformada em categórica para extração de métricas de classificação como acurácia. A conversão segue a Tabela abaixo:
 
 | Classe           | Sobrevivência         |
 | ---              | ---                   |
 | Short-survivor   |  < 300 dias           |
 | Mid-survivor     |>= 300 dias < 450 dias |
 | Long-survivor    |     >= 450 dias       |
-*Tabela (?): Esquema de conversão de dias de sobrevivência para variável categórica.*
 
 No método baseado em CNN, também é avaliada o MSE (mean squared error ou erro quadrátivo médio) comparado diretamente os valores de sobrevivência preditos com a anotação. No método tradicional, a otimização é realizada diretamente sobre as categorias.
 
@@ -121,14 +120,13 @@ Modelos de aprendizado profundo, especificamente redes neurais concolucionais (C
 
 A arquitetura da rede utilizada aqui, chamada de CNNAtt3D, é inspirada em uma CNN baseada em mecanismo de atenção (CITAÇÃO). A rede produz de forma não supervisionadas mapeamentos em duas dimensões, utilizando-se da função de ativação Sigmoid, que funcionam como um mapa de calor e um "portão" que deixa passar somente as features convolucionais desejadas pela otimização. Em resumo a arquitetura realiza camadas convolucionais seguidas de operações não-lineares. Três camadas de atenção convergem em camadas totalmente conectadas. A conversão de features 2D para features 1D é realizada com Global Average Pooling, resultando em um valor de média por canal da saída do módulo de atenção. O valor de idade é adicionado nesta fase como um neurônio extra. A saída final consiste de um único neurônio.Este neurônio de saída é utilizado como ativação diretamente de dias de sobrevivência. A ativação deste neurônio é limitada entre 1 e 2000, utilizando-se de uma ativação Sigmoid. O intervalo foi escolhido baseando-se no intervalo observado nos datasets de treino e validação.
 
-Especificamente para o experimento com a CNN3DAtt, as quatro anotações foram transformadas em três anotações cumulativas para economia de memória, seguindo a Tabela (?):
+Especificamente para o experimento com a CNN3DAtt, as quatro anotações foram transformadas em três anotações cumulativas para economia de memória, seguindo a tabela abaixo:
 
 | Nova anotação    | Composta de       |
 | ---              | ---                   |
 | Whole Tumor    |  ED + NET + ET           |
 | Tumor Core     |  NET + ET |
 | ET  |  ET      |
-*Tabela ?: Esse esquema de anotação elimina o canal do background, focando completamente no tumor.*
 
 Tanto as imagens de MRI quanto as anotações do tumor são inseridas em conjunto, fundidas com uso de múltiplos canais. Quatro modalidades de MRI mais três canais da nova anotação resultam em sete canais de entrada. Data augmentation foi utilizado na forma de patches aleatórios 7x128x128x128 em tempo de treinamento, e variação aleatória de intensidade de 0.1. Em tempo de predição (validação ou teste), crops centrais 7x128x128x128 são utilizados. A função de perda escolhida foi a Smooth L1 Loss (citação), onde uma perda de erro absoluto linear (L1) é realizada enquanto o valor é maior que 1.0, e MSE é utilizada em valores menor que 1.0. Devido aos altos valores de sobrevivência em dias, efetivamente a perda se torna L1 Loss.
 
