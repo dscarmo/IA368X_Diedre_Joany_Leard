@@ -13,7 +13,8 @@ Joany do Socorro Santa Rosa Rodrigues - 264440\
 Leard de Oliveira Fernandes - 98413
 
 ## Vídeo do Projeto
-<video controls src="https://drive.google.com/file/d/1-9-7oIXs2XLczSTYfaEmQVObxV8At7mw/view?usp=sharing" />
+
+[![](https://lh3.googleusercontent.com/A38Pn3yxRSUQgvK3VuQcBDDUcGFWT5uPuCUESd5xpcM67bulIuewkgioofcaq8feMTf342G69hvRuFm7iZ6w=w1280-h720-k-rw-pd)](https://youtube.googleapis.com/embed/?status=ok&hl=pt_BR&allow_embed=0&ps=docs&partnerid=30&autoplay=0&docid=1-9-7oIXs2XLczSTYfaEmQVObxV8At7mw&abd=0&public=false&el=leaf&title=Apresenta%C3%A7%C3%A3o%20Proposta.mp4&BASE_URL=https%3A%2F%2Fdrive.google.com%2Fu%2F2%2F&iurl=https%3A%2F%2Fdrive.google.com%2Fu%2F2%2Fvt%3Fid%3D1-9-7oIXs2XLczSTYfaEmQVObxV8At7mw&reportabuseurl=https%3A%2F%2Fdrive.google.com%2Fu%2F2%2Fabuse%3Fid%3D1-9-7oIXs2XLczSTYfaEmQVObxV8At7mw&token=1&plid=V0QWHgGDlWbWeg&timestamp=1593712982840&length_seconds=435&BASE_YT_URL=https%3A%2F%2Fdrive.google.com%2Fu%2F2%2F&cc_load_policy=1&authuser=2&cc3_module=1&wmode=window&override_hl=1&enablecastapi=0&pipable=1&enablepostapi=1&postid=drive-viewer-video-player-object-0&origin=https%3A%2F%2Fdrive.google.com "Apresentação")
 
 [Vídeo Proposta Inicial](https://drive.google.com/file/d/1-9-7oIXs2XLczSTYfaEmQVObxV8At7mw/view?usp=sharing)
 
