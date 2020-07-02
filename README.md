@@ -229,11 +229,11 @@ Note como as ativações maiores do mapa de atenção estão coincidindo com a �
 
 ## Considerações Finais
 
-Apresentou-se um estudo da aplicação de técnicas tradicionais e de aprendizado profundo sobre os dados de treino do BraTS 2020 para previsão de sobrevivência, dividido em conjuntos de treino, validação e teste. Mostrou-se que é possível alcançar predições de sobrevivência com erro absoluto médio de aproximadamente 200 dias, com acurácia em níveis similares ao reportado por submissões passadas ao desafio.
+Apresentou-se um estudo da aplicação de técnicas tradicionais e de aprendizado profundo sobre os dados de treino do BraTS 2020 para previsão de sobrevivência, dividido em conjuntos de treino, validação e teste. Mostrou-se que é possível alcançar predições de sobrevivência com erro absoluto médio de aproximadamente 200 dias, com acurácia em níveis similares ao reportado por submissões passadas ao desafio. Adicionalmente, é interessante notar que métodos tradicionais se aproximam da performance do método com Aprendizado Profundo, e a visualização do mapa de atenção da CNN nos da um *insight* de onde a rede esta "olhando" ao fazer a predição.
 
 ### Trabalhos Futuros
 
-Melhor normalização da saída da CNN e exploração de mais features para o modelo tradicional poderiam levar a melhor performance. Explorar balanceamento das classes com replicação dos dados também é uma possibilidade. Como trabalho futuro, precisa-se testar resultados nos dados de validação e teste do BraTS 2020, que ainda estão por ser liberados.
+Melhor normalização da saída da CNN e exploração de mais features para o modelo tradicional poderiam levar a melhor performance. Explorar balanceamento das classes com replicação dos dados também é uma possibilidade. Como trabalho futuro, precisa-se testar resultados nos dados de validação e teste do BraTS 2020, utilizando segmentações próprias, que ainda estão por ser liberados.
 
 ## Referências
 
