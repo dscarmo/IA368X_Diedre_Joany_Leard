@@ -263,6 +263,6 @@ ISENSEE, Fabian et al. No new-net. In: **International MICCAI Brainlesion Worksh
 
 PASZKE, Adam et al. Pytorch: An imperative style, high-performance deep learning library. In: **Advances in neural information processing systems**. 2019. p. 8026-8037.
 
-WU, Yuxin; HE, Kaiming. Group normalization. In: Proceedings of the European conference on computer vision (ECCV). 2018. p. 3-19.
+WU, Yuxin; HE, Kaiming. Group normalization. In: **Proceedings of the European conference on computer vision (ECCV)**. 2018. p. 3-19.
 
-NAIR, Vinod; HINTON, Geoffrey E. Rectified linear units improve restricted boltzmann machines. In: ICML. 2010.
+NAIR, Vinod; HINTON, Geoffrey E. Rectified linear units improve restricted boltzmann machines. In: **ICML**. 2010.
