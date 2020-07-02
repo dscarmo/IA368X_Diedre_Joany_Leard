@@ -165,17 +165,21 @@ Um fator limitante para escolha do modelo de classificação empregado na análi
 
 ### Resultados dos modelos de classificação (descritores de imagem)
 
+Todos os parâmetros escolhidos nos modelos avaliados passaram por validação cruzada (*20-fold cross validation*), ao final dos treinamentos os mesmos foram avaliados nos três conjuntos de teste para as três classes de sobrevivência (curta, média e longa). A melhor acurácia foi obtida no modelo PAC (Classificador passivo agressivo), alcançando 59% de acurácia no conjunto de características com menor resolução dos descritores de imagem obtidos.
 
-
-| Modelo    | Acurácia Conjunto de dados 0                                 | Acurácia Conjunto de dados 1                                 | Acurácia Conjunto de dados 2                                 |
+| Modelo    | Acurácia Conjunto de características 0                       | Acurácia Conjunto de características 1                       | Acurácia Conjunto de características 2                       |
 | :-------- | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **SVM**   | *Treino*: 0,93 <br />*Validação*: 0,57<br />*Teste*: 0,41<br /> | *Treino*: 0,93 <br />*Validação*: 0,43<br />*Teste*: 0,49<br /> | *Treino*: 0,55 <br />*Validação*: 0,52<br />*Teste*: 0,39<br /> |
-| **nuSVM** | *Treino*: 0,91 <br />*Validação*: 0,52 <br />*Teste*: 0,43 <br> | *Treino*: 0,90 <br />*Validação*: 0,38<br />*Teste*: 0,46<br /> | *Treino*: 0,91 <br />*Validação*: 0,57<br />*Teste*: 0,33<br /> |
-| **PAC**   | *Treino*: 0,67 <br />*Validação*: 0,38<br />*Teste*: **0,59**<br /> | *Treino*: 0,63 <br />*Validação*: 0,52<br />*Teste*: **0,54**<br /> | *Treino*: 0,63 <br />*Validação*: 0,43<br />*Teste*: 0,33<br /> |
-| **RF**    | *Treino*: 1,00 <br />*Validação*: 0,43<br />*Teste*: 0,37<br /> | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: 0,39<br /> | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: **0,41***<br /> |
-| **LF**    | *Treino*: 0,74 <br />*Validação*: 0,43<br />*Teste*: **0,47***<br /> | *Treino*: 0,72 <br />*Validação*: 0,43<br />*Teste*: **0,50***<br /> | *Treino*: 0,69 <br />*Validação*: 0,57<br />*Teste*: **0,43**<br /> |
+| **SVM**   | *Treino*: 0,93 <br />*Validação*: 0,57<br />*Teste*: 0,41    | *Treino*: 0,93 <br />*Validação*: 0,43<br />*Teste*: **0,49\**** | *Treino*: 0,55 <br />*Validação*: 0,52<br />*Teste*: 0,39    |
+| **nuSVM** | *Treino*: 0,91 <br />*Validação*: 0,52 <br />*Teste*: 0,43   | *Treino*: 0,90 <br />*Validação*: 0,38<br />*Teste*: 0,46    | *Treino*: 0,91 <br />*Validação*: 0,57<br />*Teste*: 0,33    |
+| **PAC**   | *Treino*: 0,67 <br />*Validação*: 0,38<br />*Teste*: **0,59** | *Treino*: 0,63 <br />*Validação*: 0,52<br />*Teste*: **0,54** | *Treino*: 0,63 <br />*Validação*: 0,43<br />*Teste*: 0,33    |
+| **RF**    | *Treino*: 1,00 <br />*Validação*: 0,43<br />*Teste*: 0,37    | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: 0,39    | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: **0,41*** |
+| **LF**    | *Treino*: 0,74 <br />*Validação*: 0,43<br />*Teste*: **0,47*** | *Treino*: 0,72 <br />*Validação*: 0,43<br />*Teste*: **0,50*** | *Treino*: 0,69 <br />*Validação*: 0,57<br />*Teste*: **0,43** |
 
+Contudo é necessário avaliar a limitação do tamanho da base de dados e da distribuição de classes de sobrevivência. O que poderia explicar o baixo desempenho do modelo SVM na validação e teste, além de um possível *overfit* (apesar da validação cruzada durante o treinamento). Apesar do uso limitado de descritores de imagem (volume, HOG e LBP), o número de características é próximo ao tamanho do conjunto de dados, o que torna difícil sua análise quanto a robustez  (o que é significante no conjunto de treino, pode não ser na validação e testes). 
 
+(NÃO SEI SE FICA OU SE TIRA)
+
+Abaixo temos um mapa de calor dos descritores de imagem obtidos, é possível verificar agrupamentos entre diferentes descritores em diferentes imagens. Assim, acredita-se que estas características (*features*) poderiam ser agregadas para reduzir a dimensionalidade dos dados avaliados.
 
 | <img src="./assets/img/heatmap.png" alt="heat_map"  /> |
 | :----------------------------------------------------: |
@@ -184,10 +188,6 @@ Um fator limitante para escolha do modelo de classificação empregado na análi
 
 
 
-
-
-
-(LEARD FIM)
 
 TODO tabela resultados CNN
 
