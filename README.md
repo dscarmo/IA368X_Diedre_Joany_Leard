@@ -141,7 +141,7 @@ Os experimentos principais apresentados aqui envolveram experimentar com *learni
 
 A seguir, links que levam as implementações da metodologia reportada neste relatório. Os notebooks são pontos de entrada para importação de outros códigos vindo de outras bibliotecas ou scripts presentes no Drive Compartilhado.
 
-**[Notebook extração de features](./notebooks/Process_and_Extract_Features_MRI.ipynb)**
+**[Notebook extração de features Notebook](./notebooks/Process_and_Extract_Features_MRI.ipynb)**, **[Notebook extração de features COLAB](https://colab.research.google.com/drive/1eS07y4vrmxqOWbt83kgCcXXXQKsvF2MI?usp=sharing)**
 
 **[Notebook CNN](https://colab.research.google.com/drive/1IY-CMSZV-zriZP7jOq61AmR4f66XeqtI?usp=sharing)**
 
@@ -170,8 +170,6 @@ Todos os parâmetros escolhidos nos modelos avaliados passaram por validação c
 | **LF**    | *Treino*: 0,74 <br />*Validação*: 0,43<br />*Teste*: **0,47*** | *Treino*: 0,72 <br />*Validação*: 0,43<br />*Teste*: **0,50*** | *Treino*: 0,69 <br />*Validação*: 0,57<br />*Teste*: **0,43** |
 
 Contudo, é necessário avaliar a limitação do tamanho da base de dados e da distribuição de classes de sobrevivência. O que poderia explicar o baixo desempenho do modelo SVM na validação e teste, além de um possível *overfit* (apesar da validação cruzada durante o treinamento). Apesar do uso limitado de descritores de imagem (volume, HOG e LBP), o número de características é próximo ao tamanho do conjunto de dados, o que torna difícil sua análise quanto a robustez  (o que é significante no conjunto de treino, pode não ser na validação e testes).
-
-(NÃO SEI SE FICA OU SE TIRA)
 
 Abaixo temos um mapa de calor dos descritores de imagem obtidos em que é possível verificar agrupamentos entre diferentes descritores em imagens distintas. Assim, acredita-se que estas características (*features*) poderiam ser agregadas para reduzir a dimensionalidade dos dados avaliados.
 
