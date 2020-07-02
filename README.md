@@ -13,9 +13,6 @@ Joany do Socorro Santa Rosa Rodrigues - 264440\
 Leard de Oliveira Fernandes - 98413
 
 ## Vídeo do Projeto
-
-[![](https://lh3.googleusercontent.com/A38Pn3yxRSUQgvK3VuQcBDDUcGFWT5uPuCUESd5xpcM67bulIuewkgioofcaq8feMTf342G69hvRuFm7iZ6w=w1280-h720-k-rw-pd)](https://drive.google.com/file/d/1-9-7oIXs2XLczSTYfaEmQVObxV8At7mw/view?usp=sharing "Apresentação")
-
 [Vídeo Proposta Inicial](https://drive.google.com/file/d/1-9-7oIXs2XLczSTYfaEmQVObxV8At7mw/view?usp=sharing)
 
 ## Introdução e Motivação
