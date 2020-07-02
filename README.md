@@ -4,10 +4,10 @@
 # Predição de Sobrevivência em Pacientes com Tumor Cerebral
 
 ## Descrição Resumida do Projeto
-O desafio Brain Tumor Segmentation Challenge (BraTS) contribui diretamente na provisão de dados públicos de ressonância magnética para pesquisa sobre tumores cerebrais, com diversas tarefas envolta da segmentação dos tumores. Uma destas, é a utilização de segmentações para estudar a possibilidade de predição de sobrevivência dos pacientes. O diagnóstico de Tumor Cerebral frequentemente acompanha uma previsão de tempo de vida do paciente, onde a acurácia desta previsão pelo médico pode melhorar a qualidade de vida antes do óbito, também chamada de qualidade de morte. Este trabalho pretende experimentar com os dados públicos do BraTS, com objetivo de prever com menor erro possível o tempo de sobrevivência dos pacientes, utilizando-se das segmentações manuais providas. Comparamos modelos de aprendizado de máquina tradicionais e baseados em Aprendizado Profundo. Os dados incluem anotações da idade e do tempo que o paciente sobreviveu, que são usados como referência. Os melhores resultados encontrados foram de ?.
+O desafio Brain Tumor Segmentation Challenge (BraTS) contribui diretamente na provisão de dados públicos de ressonância magnética para pesquisa sobre tumores cerebrais, com diversas tarefas envolta da segmentação dos tumores. Uma destas, é a utilização de segmentações para estudar a possibilidade de predição de sobrevivência dos pacientes. O diagnóstico de Tumor Cerebral frequentemente acompanha uma previsão de tempo de vida do paciente, onde a acurácia desta previsão pelo médico pode melhorar a qualidade de vida antes do óbito, também chamada de qualidade de morte. Este trabalho pretende experimentar com os dados públicos do BraTS, com objetivo de prever com menor erro possível o tempo de sobrevivência dos pacientes, utilizando-se das segmentações manuais providas. Comparamos modelos de aprendizado de máquina tradicionais e baseados em Aprendizado Profundo. Os dados incluem anotações da idade e do tempo que o paciente sobreviveu, que são usados como referência. O resultado do teste final foi de 0.66 de acurácia, avaliando sobre categorias de sobrevivência.
 
 ## Abstract in English
-The Brain Tumor Segmentation Challenge (BraTS) challenge directly contributes to the provision of public MRI data for brain tumor research, with several tasks surrounding the main task of tumor segmentation. One of these tasks is the use of segmentations to study the possibility of predicting patient survival. The diagnosis of Cerebral Tumor often accompanies a prediction of the patient's lifetime, where the accuracy of this prediction by the physician can improve the quality of life before death, also called quality of death. This work intends to experiment with the public data of BraTS, in order to predict the survival time of patients with the least possible error, using the manual segmentations provided. We compare traditional machine learning models based on Deep Learning. The data includes notes on patient's age survival in days, which is used as a reference. The best results found were from ?.
+The Brain Tumor Segmentation Challenge (BraTS) challenge directly contributes to the provision of public MRI data for brain tumor research, with several tasks surrounding the main task of tumor segmentation. One of these tasks is the use of segmentations to study the possibility of predicting patient survival. The diagnosis of Cerebral Tumor often accompanies a prediction of the patient's lifetime, where the accuracy of this prediction by the physician can improve the quality of life before death, also called quality of death. This work intends to experiment with the public data of BraTS, in order to predict the survival time of patients with the least possible error, using the manual segmentations provided. We compare traditional machine learning models and Deep Learning. The data includes notes on patient's age survival in days, which is used as a reference. The final test set result was 0.66 accuracy, assessing survival categories.
 
 ## Equipe
 Diedre Santos do Carmo - 211492\
@@ -20,7 +20,7 @@ Leard de Oliveira Fernandes - 98413
 ## Introdução e Motivação
 Os tumores têm uma forma muito heterogênea, com diferentes graus e classificações associados. Devido a essa variação, o processamento automático de tumores cerebrais ainda é um desafio, seja para classificação, segmentação ou a tarefa específica deste trabalho, predição de sobrevivência.
 
-O Brain Tumor Segmentation Challenge (BraTS)(citação) é um desafio anual que provê dados públicos multimodalidade (FLAIR, T1, T1 com contraste e T2) com anotações manuais de segmentação dos Glioma, um tipo de tumor cerebral. Também estão presentes tabelas de dias de sobrevivência dos pacientes dos quais as imagens foram adquiridas. A tarefa principal do BraTS é a de segmentação de tumores, usando segmentações manuais como referências. Outra das tarefas propostas pelo desafio envolve utilizar-se das segmentações para prever o tempo de sobrevivência do paciente.
+O Brain Tumor Segmentation Challenge (BraTS) é um desafio anual que provê dados públicos multimodalidade (FLAIR, T1, T1 com contraste e T2) com anotações manuais de segmentação dos Glioma, um tipo de tumor cerebral. Também estão presentes tabelas de dias de sobrevivência dos pacientes dos quais as imagens foram adquiridas. A tarefa principal do BraTS é a de segmentação de tumores, usando segmentações manuais como referências. Outra das tarefas propostas pelo desafio envolve utilizar-se das segmentações para prever o tempo de sobrevivência do paciente.
 
 A proposta deste projeto é avaliar a performance de métodos de aprendizado de máquina sobre a tarefa de predição de sobrevivência, utilizando-se como entrada tanto das imagens de MRI como de anotações manuais do tumor, alem da idade do paciente. Com consciência de que estes métodos não substituiriam o profissional da saúde, mas podem servir de um auxílio na decisão média, exploramos dois caminhos metodológicos: aprendizado de maquina tradicional com baseando-se em features como LBP, HOG e volume do tumor, e aprendizado profundo utilizando redes neurais convolucionais (CNN) 3D, com mecanismos de atenção. Uma hipótese paralela a ser explorada no futuro é que mapas de atenção resultantes da aplicação de uma CNN de predição de sobrevivência podem ser uma feature útil para segmentação automática.
 
@@ -36,7 +36,7 @@ Utilizar aprendizado de máquina tradicional e aprendizado de máquina profundo 
 
 ## Recursos e Materiais
 
-O conjunto de dados utilizado, do desafio BraTS 2020, contém 369 sujeitos com exames de ressonância magnética de quatro modalidades: T1, pós-contraste T1, T2 e volumes FLAIR (veja a Figura 1). Todos os exames são de gliomas de baixo ou alto grau (LGG / HGG), adquiridos com diferentes protocolos clínicos e vários scanners de várias instituições. Todos os sujeitos têm segmentações manuais, realizadas por um a quatro avaliadores, seguindo o mesmo protocolo, com a segmentação resultante sendo aprovada por profissionais experientes. neurorradiologistas. As anotações compreendem o *enhancing tumor* (ET), o edema peritumoral (ED) e o núcleo tumoral necrótico e *non enhancing tumor* (NET), conforme descrito no último artigo de resumo do BraTS (CITAÇÃO).  Os dados fornecidos são distribuídos após o pré-processamento do BraTS: co-registro para o mesmo modelo anatômico, interpolação para a mesma resolução e remoção do crânio. Pré-processamento adicional segue o aplicado no trabalho do Isensee (CITAÇÃO): as imagens são subtraídas pela média e divididas pelo desvio padrão da região do cérebro e cortadas dentro do intervalo de -5 a 5. Por fim, elas são min-max normalizadas até o intervalo de 0 a 1. As anotações são organizados de maneira exclusiva, incluindo plano de fundo, resultando em quatro canais (plano de fundo, ED, NET e ET). Informações de idade e sobrevivência, o alvo desta pesquisa, também são incluídas.
+O conjunto de dados utilizado, do desafio BraTS 2020, contém 369 sujeitos com exames de ressonância magnética de quatro modalidades: T1, pós-contraste T1, T2 e volumes FLAIR (veja a Figura 1). Todos os exames são de gliomas de baixo ou alto grau (LGG / HGG), adquiridos com diferentes protocolos clínicos e vários scanners de várias instituições. Todos os sujeitos têm segmentações manuais, realizadas por um a quatro avaliadores, seguindo o mesmo protocolo, com a segmentação resultante sendo aprovada por profissionais experientes. neurorradiologistas. As anotações compreendem o *enhancing tumor* (ET), o edema peritumoral (ED) e o núcleo tumoral necrótico e *non enhancing tumor* (NET), conforme descrito no último artigo de resumo do BraTS.  Os dados fornecidos são distribuídos após o pré-processamento do BraTS: co-registro para o mesmo modelo anatômico, interpolação para a mesma resolução e remoção do crânio. Pré-processamento adicional segue o aplicado na submissão de Isensee et al. de 2018: as imagens são subtraídas pela média e divididas pelo desvio padrão da região do cérebro e cortadas dentro do intervalo de -5 a 5. Por fim, elas são min-max normalizadas até o intervalo de 0 a 1. As anotações são organizados de maneira exclusiva, incluindo plano de fundo, resultando em quatro canais (plano de fundo, ED, NET e ET). Informações de idade e sobrevivência, o alvo desta pesquisa, também são incluídas.
 
 
 Este artigo dividirá os dados de treinamento do desafio (depois de randomizar com semente fixa) em uma abordagem de *hold-out* de 70% de treinamento, 10% de validação e 20% para o treinamento. Sujeitos que não tem informação de sobrevivência foram removidos, resultando em 169 treinamentos, 21 em validação e 46 sujeitos de teste de um total de 236 sujeitos com informação de sobrevivência. Todos esses sujeitos tem Glioma do tipo HGG.
@@ -71,38 +71,38 @@ Seguindo o padrão de avaliação do BraTS, a variável alvo de sobrevivência, 
 
 | Classe           | Sobrevivência         |
 | ---              | ---                   |
-| Short-survivor   |  < 300 dias           |
-| Mid-survivor     |>= 300 dias < 450 dias |
-| Long-survivor    |     >= 450 dias       |
+| Curta   |  < 300 dias           |
+| Média     |>= 300 dias < 450 dias |
+| Longa    |     >= 450 dias       |
 
 No método baseado em CNN, também é avaliada o MSE (*mean squared error* ou erro quadrático médio) comparado diretamente os valores de sobrevivência preditos com a anotação. No método tradicional, a otimização é realizada diretamente sobre as categorias.
 
 ### Aprendizado de Máquina Tradicional
 Para a realização do processo de classificação de sobrevivência do sujeito, foram utilizados a idade e os descritores da imagem tumoral a partir de uma base de dados de 236 sujeitos. Para avaliação, validação e teste o conjunto disponibilizado foi dividido em 169 sujeitos para treino, 21 sujeitos para validação e 46 sujeitos para teste. As bases de treino e validação foram utilizadas para seleção dos melhores parâmetros e modelos utilizados no processo de classificação das imagens. As imagens disponibilizadas foram processadas no Colab utilizando a linguagem Python e o conjunto de bibliotecas Scikit-Learn, Numpy e Pandas para extração das características (descritores) da imagem. Além disso, foi utilizado o Orange para realizar a visualização das características obtidas.
 
-Para a extração dos descritores foram consideradas as seguintes características: volume do tumor, média do histograma de vetores orientados (HOG), média do histograma do padrão binário local (LBP), 10 bins do histograma HOG e 10 bins do histograma LBP. Para todas as características de imagem, foram analisados o corpo sólido e o corpo necrosado do tumor (menor em volume), além disso foram considerados os 4 tipos de imagens disponibilizadas (T1, T1Gd, T2 e T2-FLAIR). Assim, foi possível totalizar 162 características da imagem para composição da classificação.
+Para a extração dos descritores foram consideradas as seguintes características: volume do tumor, média do histograma de vetores orientados (HOG), média do histograma do padrão binário local (LBP), 10 bins do histograma HOG e 10 bins do histograma LBP. Para todas as características de imagem, foram analisados o corpo sólido (ET+NET) e NET do tumor (menor em volume), além disso foram considerados os 4 tipos de imagens disponibilizadas (T1, T1Gd, T2 e T2-FLAIR). Assim, foi possível totalizar 162 características da imagem para composição da classificação.
 
 Para aplicação dos modelos de classificação os dados obtidos foram normalizados (![img](http://www.sciweavers.org/tex2img.php?eq=%20%5Cmu%20%3D0%2C%20%20%5Csigma%20%3D1&bc=White&fc=Black&im=png&fs=12&ff=fourier&edit=0)). Foram considerados os seguintes modelos: *Support Vector Machine*, *Passive Agressive Classifier*, *Random Forest* e *Logistic Regression*. Para todos os modelos utilizados foi empregada a técnica de *grid-search* para obtenção dos melhores parâmetros com os dados de treino e validação. Todos os modelos obtidos foram avaliados sobre os conjuntos de características das imagens de teste sem qualquer modificação de seus parâmetros (apenas no treino/validação), onde foram analisados precisão, sensibilidade (*recall*), f1-score e acurácia.
 
-#### Extração dos descritores de imagem
+#### Extração dos Descritores de Imagem
 
-Para a extração do descritor HOG, optou-se pela aplicação apenas no tumor segmentado, uma vez que a resolução necessária para evidenciar o HOG numa imagem completa (cérebro e tumor) requer uma maior resolução ([Figura 1](./assets/img/image_hog_1.png) e [Figura 2](./assets/img/tumor_hog_1.png)).
+Para a extração do descritor HOG, optou-se pela aplicação apenas no tumor segmentado, uma vez que a resolução necessária para evidenciar o HOG numa imagem completa (cérebro e tumor) requer uma maior resolução ([Figura 2](./assets/img/image_hog_1.png) e [Figura 3](./assets/img/tumor_hog_1.png)).
 
-|   ![image_hog_1](./assets/img/image_hog_1.png "Figura 1")    |
+|   ![image_hog_1](./assets/img/image_hog_1.png "Figura 2")    |
 | :----------------------------------------------------------: |
-| **Figura 1:** Imagem do cérebro segmentado com tumor e histograma de gradientes orientados |
-|   ![tumor_hog_1](./assets/img/tumor_hog_1.png "Figura 2")    |
-| **Figura 2:** Tumor segmentado e  seu histograma de gradientes orientados. |
+| **Figura 2:** Imagem do cérebro segmentado com tumor e histograma de gradientes orientados |
+|   ![tumor_hog_1](./assets/img/tumor_hog_1.png "Figura 3")    |
+| **Figura 3:** Tumor segmentado e  seu histograma de gradientes orientados. |
 
-Seguindo a mesma abordagem do descritor HOG, optou-se por extrair o descritor LBP apenas do tumor segmentado, conforme [Figura 3](./assets/img/tumo_lbp_1.png). Além disso, avaliou-se a aplicação do método PCA (*Principal Component Analisys*) para redução de dimensionalidade, mantendo a representatividade ao nível de 99%, contudo houve uma grande distorção no resultado, sendo então descartado a sua utilização [Figura 4](./assets/img/image_lbp_2.png).
+Seguindo a mesma abordagem do descritor HOG, optou-se por extrair o descritor LBP apenas do tumor segmentado, conforme [Figura 4](./assets/img/tumo_lbp_1.png). Além disso, avaliou-se a aplicação do método PCA (*Principal Component Analisys*) para redução de dimensionalidade, mantendo a representatividade ao nível de 99%, contudo houve uma grande distorção no resultado, sendo então descartado a sua utilização [Figura 5](./assets/img/image_lbp_2.png).
 
-|    ![tumo_lbp_1](./assets/img/tumo_lbp_1.png "Figura 3")     |
+|    ![tumo_lbp_1](./assets/img/tumo_lbp_1.png "Figura 4")     |
 | :----------------------------------------------------------: |
-| **Figura 3:** Tumor segmentado e apresentação do descrito LBP. |
-|         ![](./assets/img/image_lbp_2.png "Figura 4")         |
-| **Figura 4:** Tumor segmentado e apresentação do descritor LBP com utilização de PCA. |
+| **Figura 4:** Tumor segmentado e apresentação do descrito LBP. |
+|         ![](./assets/img/image_lbp_2.png "Figura 5")         |
+| **Figura 5:** Tumor segmentado e apresentação do descritor LBP com utilização de PCA. |
 
-#### Conjunto de características
+#### Conjuntos de Características
 
 A partir dos descritores de imagem processados e dos dados de idade do sujeito, foram gerados três arquivos CSV para cada treino, validação e teste. Cada arquivo foi gerado com diferentes resoluções para obtenção do descritor, da menor resolução para maior resolução, conforme tabela abaixo.
 
@@ -116,10 +116,10 @@ A partir dos descritores de imagem processados e dos dados de idade do sujeito, 
 
 Modelos de aprendizado profundo, especificamente redes neurais convolucionais (CNNs) contêm uma quantidade significativamente maior de parâmetros que o contido em redes neurais tradicionais. A rede tem capacidade de aprender diretamente dos dados, como dados de imagem, não somente de duas dimensões até de três dimensões. Em um breve resumo, um processo de otimização utilizando gradientes de uma função de perda que quantifica a performance da rede, atualiza todos os pesos das convoluções realizadas pela rede, que são seguidas de operações não lineares.
 
-![arch](/assets/img/arch.png) **TODO**
-*Figura (?): Diagrama da arquitetura da CNN3DAtt.*
+![arch](./assets/img/arch.png) **TODO**
+**Figura 6:** Diagrama da arquitetura da CNN3DAtt.
 
-A arquitetura da rede utilizada aqui, chamada de CNNAtt3D, é inspirada em uma CNN baseada em mecanismo de atenção (CITAÇÃO), de onde ela foi adaptada para convoluções 3D, onde a original é 2D. O número de canais, naturalmente diferente ao transformar de 2D para 3D, foi determinado por experimentos iniciais. A rede produz de forma não supervisionadas mapeamentos posicionais chamados de mapas de atenção, utilizando-se da função de ativação Sigmoid, que funcionam como um mapa de calor e um "portão" que deixa passar somente as *features* convolucionais desejadas pela otimização, naquela posição. Em resumo a arquitetura realiza camadas convolucionais seguidas de operações não-lineares, três camadas de atenção convergem em camadas totalmente conectadas. A conversão de *features* 3D para *features* 1D é realizada com *Global Average Pooling*, resultando em um valor de média por canal na saída do módulo de atenção. O valor de idade é adicionado nesta fase como um neurônio extra. A saída final consiste de um único neurônio. Este neurônio de saída é utilizado como ativação diretamente de dias de sobrevivência. A ativação deste neurônio é limitada entre 1 e 2000, utilizando-se de uma ativação Sigmoid. O intervalo foi escolhido baseando-se no intervalo observado nos *datasets* de treino e validação.
+A arquitetura da rede utilizada aqui, chamada de CNNAtt3D, é inspirada em uma CNN baseada em mecanismo de atenção (GORRIZ et al., 2019), de onde ela foi adaptada para convoluções 3D, onde a original é 2D. O número de canais, naturalmente diferente ao transformar de 2D para 3D, foi determinado por experimentos iniciais. A rede produz de forma não supervisionadas mapeamentos posicionais chamados de mapas de atenção, utilizando-se da função de ativação Sigmoid, que funcionam como um mapa de calor e um "portão" que deixa passar somente as *features* convolucionais desejadas pela otimização, naquela posição. Em resumo a arquitetura realiza camadas convolucionais seguidas de operações não-lineares, três camadas de atenção convergem em camadas totalmente conectadas. A conversão de *features* 3D para *features* 1D é realizada com *Global Average Pooling*, resultando em um valor de média por canal na saída do módulo de atenção. O valor de idade é adicionado nesta fase como um neurônio extra. A saída final consiste de um único neurônio. Este neurônio de saída é utilizado como ativação diretamente de dias de sobrevivência. A ativação deste neurônio é limitada entre 1 e 2000, utilizando-se de uma ativação Sigmoid. O intervalo foi escolhido baseando-se no intervalo observado nos *datasets* de treino e validação.
 
 Especificamente para o experimento com a CNN3DAtt, as quatro anotações foram transformadas em três anotações cumulativas para economia de memória, seguindo a tabela abaixo:
 
@@ -129,7 +129,7 @@ Especificamente para o experimento com a CNN3DAtt, as quatro anotações foram t
 | Tumor Core     |  NET + ET |
 | ET  |  ET      |
 
-Tanto as imagens de MRI quanto as anotações do tumor são inseridas em conjunto, fundidas com uso de múltiplos canais. Quatro modalidades de MRI mais três canais da nova anotação resultam em sete canais de entrada. Data *augmentation* (aumentação de dados) foi utilizado na forma de patches aleatórios 7x128x128x128 em tempo de treinamento, e variação aleatória de intensidade de 0.1. Em tempo de predição (validação ou teste), *crops* centrais 7x128x128x128 são utilizados. A função de perda escolhida foi a Smooth L1 Loss (citação), onde uma perda de erro absoluto linear (L1) é realizada enquanto o valor é maior que 1.0, e MSE é utilizada em valores menor que 1.0. Devido aos altos valores de sobrevivência em dias, efetivamente a perda se torna L1 *Loss*. Valores de *loss* na casa das centenas são esperados, devido a não realizarmos nenhuma normalização neste caso. Experimentos iniciais determinaram um número de épocas de 300. *Weight Decay* é usado no otimizador com valor de 1e-05. *Batch size* é fixado no máximo cabendo em uma GPU de 12 GB de memória, 3. Experimentos com treinamento sobre *mixed-precision* pioraram o resultado.
+Tanto as imagens de MRI quanto as anotações do tumor são inseridas em conjunto, fundidas com uso de múltiplos canais. Quatro modalidades de MRI mais três canais da nova anotação resultam em sete canais de entrada. Data *augmentation* (aumentação de dados) foi utilizado na forma de patches aleatórios 7x128x128x128 em tempo de treinamento, e variação aleatória de intensidade de 0.1. Em tempo de predição (validação ou teste), *crops* centrais 7x128x128x128 são utilizados. A função de perda escolhida foi a Smooth L1 Loss, onde uma perda de erro absoluto linear (L1) é realizada enquanto o valor é maior que 1.0, e MSE é utilizada em valores menor que 1.0. Devido aos altos valores de sobrevivência em dias, efetivamente a perda se torna L1 *Loss*. Valores de *loss* na casa das centenas são esperados, devido a não realizarmos nenhuma normalização neste caso. Experimentos iniciais determinaram um número de épocas de 300. *Weight Decay* é usado no otimizador com valor de 1e-05. *Batch size* é fixado no máximo cabendo em uma GPU de 12 GB de memória, 3. Experimentos com treinamento sobre *mixed-precision* pioraram o resultado.
 
 Os experimentos principais apresentados aqui envolveram experimentar com *learning rate* e otimizador, entre Adam e RAdam. O melhor conjunto de hiperparâmetros de treinamento e validação foi escolhido para ser avaliado no conjunto de testes. Diversos experimentos realizados que não chegaram à convergência ou não tiveram impacto significativo, não serão apresentados. Finalmente, os mapas de atenção são visualizados para verificar em quais localizações aproximadas a rede esta dando mais "atenção".
 
@@ -139,9 +139,11 @@ Os experimentos principais apresentados aqui envolveram experimentar com *learni
 
 A seguir, links que levam as implementações da metodologia reportada neste relatório. Os notebooks são pontos de entrada para importação de outros códigos vindo de outras bibliotecas ou scripts presentes no Drive Compartilhado.
 
-**[Notebook extração de features Notebook](./notebooks/Process_and_Extract_Features_MRI.ipynb)**, **[Notebook extração de features COLAB](https://colab.research.google.com/drive/1eS07y4vrmxqOWbt83kgCcXXXQKsvF2MI?usp=sharing)**
+**[Notebook extração de features Notebook](./notebooks/Process_and_Extract_Features_MRI.ipynb)**
 
-**[Notebook CNN](https://colab.research.google.com/drive/1IY-CMSZV-zriZP7jOq61AmR4f66XeqtI?usp=sharing)**
+**[Notebook extração de features COLAB](https://colab.research.google.com/drive/1eS07y4vrmxqOWbt83kgCcXXXQKsvF2MI?usp=sharing)**
+
+**[Notebook CNN (COLAB)](https://colab.research.google.com/drive/1IY-CMSZV-zriZP7jOq61AmR4f66XeqtI?usp=sharing)**
 
 
 ## Evolução do Projeto
@@ -155,9 +157,9 @@ Em termos da aproximação baseada em aprendizado profundo, a maior limitação 
 
 Resultados e discussão das duas abordagens são apresentados separadamente nas próximas seções.
 
-### Resultados dos modelos de classificação baseados em descritores de imagem
+### Resultados Aprendizado Tradicional
 
-Todos os parâmetros escolhidos nos modelos avaliados passaram por validação cruzada (*20-fold cross validation*) e, ao final dos treinamentos, os mesmos foram avaliados nos três conjuntos de teste para as três classes de sobrevivência (curta, média e longa). A melhor acurácia foi obtida no modelo PAC (Classificador passivo agressivo), alcançando 59% de acurácia no conjunto de características com menor resolução dos descritores de imagem obtidos. 
+Todos os parâmetros escolhidos nos modelos avaliados passaram por validação cruzada (*20-fold cross validation*) e, ao final dos treinamentos, os mesmos foram avaliados nos três conjuntos de teste para as três classes de sobrevivência (curta, média e longa). A melhor acurácia foi obtida no modelo PAC (Classificador passivo agressivo), alcançando 59% de acurácia no conjunto de características com menor resolução dos descritores de imagem obtidos. Lembrando que os resultados de teste foram computados após fixação dos modelos analisando a validação.
 
 | Modelo    | Acurácia conjunto de características 0                       | Acurácia conjunto de características 1                       | Acurácia conjunto de características 2                       |
 | :-------- | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -187,7 +189,7 @@ Abaixo temos um mapa de calor dos descritores de imagem obtidos em que é possí
 
 | <img src="./assets/img/heatmap.png" alt="heat_map"  /> |
 | :----------------------------------------------------: |
-|    Figura X: Mapa de calor dos descritores obtidos.    |
+|    **Figura 7:** Mapa de calor dos descritores obtidos.    |
 
 
 ### Resultados Aprendizado Profundo
@@ -205,35 +207,35 @@ Os gráficos abaixo apresentam comparações da convergência e grau de *overfit
 
 |    ![loss](./assets/img/loss_curve.png "Visualização de Atenção")     |
 | :----------------------------------------------------------: |
-| **Figura X:** Convergência da Loss para treino e validação dos modelos 1 a 5. Linhas pontilhadas são curvas de treino, e contínuas de validação. Observa-se o mínimo de validação do melhor modelo, 3, em vermelho.|
+| **Figura 8:** Convergência da Loss para treino e validação dos modelos 1 a 5. Linhas pontilhadas são curvas de treino, e contínuas de validação. Observa-se o mínimo de validação do melhor modelo, 3, em vermelho.|
 
 O modelo 3, com resultados em negrito, foi selecionado como melhor modelo para avaliação mais aprofundada e resultados de teste, incluindo avaliação de acurácia (ACC) de classificação sobre as 3 classes definidas previamente, e erro médio quadrático, presentes na tabela abaixo.
 
-| Dataset   | MSE | ACC  |
+| Dataset   | MSE   | ACC  |
 | ---       | ---   |  --- |
 | Validação |118352 | 0.66 |
 | Teste     |129667 | 0.54 |
 
-Embora os resultados não aparentem ser bons inicialmente, é importante notar que o desempenho de validação alcançado por métodos submetidos ao último desafio de 2019 variou entre 0.2 e 0.65, com MSE entre 80000 e 3000000 ou mais. Os valores não são diretamente comparáveis devido a dois fatores: os conjuntos de dados são diferentes; e o BraTS requer que a os autores utilizem suas próprias segmentações como entrada da predição de sobrevivência, o que não foi feito neste trabalho. Utilizamos-nos das anotações manuais, o que pode ter trazido uma vantagem. Devido a esses fatores, não faremos comparações diretas com outros métodos da literatura.
+Embora os resultados não aparentem ser bons inicialmente, é importante notar que o desempenho de validação alcançado por métodos submetidos ao último desafio de 2019 variou entre 0.2 e 0.65, com MSE entre 80000 e 300000 ou mais. Os valores não são diretamente comparáveis devido a dois fatores: os conjuntos de dados são diferentes; e o BraTS requer que a os autores utilizem suas próprias segmentações como entrada da predição de sobrevivência, o que não foi feito neste trabalho. Utilizamos-nos das anotações manuais, o que pode ter trazido uma vantagem. Devido a esses fatores, não faremos comparações diretas com outros métodos da literatura.
 
-A Figura X visualiza o mapa de atenção da CNN3DAtt como uma imagem devido a sua propriedade de possuir um canal ativado entre 1 e 0, como descrito na metodologia. Valores de cor foram adicionados para melhor visualização utilizando o *colormap* "afmhot" do matplotlib, e somente valores entre 0.8 e 1.0 são incluídos para maior contraste.
+A Figura 9 visualiza o mapa de atenção da CNN3DAtt como uma imagem devido a sua propriedade de possuir um canal ativado entre 1 e 0, como descrito na metodologia. Valores de cor foram adicionados para melhor visualização utilizando o *colormap* "afmhot" do matplotlib, e somente valores entre 0.8 e 1.0 são incluídos para maior contraste.
 
 |    ![att](./assets/img/att.png "Visualização de Atenção")     |
 | :----------------------------------------------------------: |
-| **Figura X:** Visualização do primeiro mapa de atenção comparada à fatias das quatro modalidades correspondentes.|
+| **Figura 9:** Visualização do primeiro mapa de atenção comparada à fatias das quatro modalidades correspondentes.|
 
 Note como as ativações maiores do mapa de atenção estão coincidindo com a área do tumor, mostrando que a rede está levando em maior consideração *features* convolucionais aprendidas próximas a essa área.
 
 
-## Conclusões
+## Considerações Finais
 
-Apresentou-se um estudo da aplicação de técnicas tradicionais e de aprendizado profundo sobre os dados de treino do BraTS 2020 para previsão de sobrevivência, dividido em conjuntos de treino, validação e teste. Mostrou-se que é possível alcançar predições de sobrevivência com erro absoluto médio de aproximadamente 200 dias, com acurácia em níveis similares ao reportado por submissões passadas ao desafio. Como trabalho futuro, precisa-se testar resultados nos dados de validação e teste do BraTS 2020, que ainda estão por ser liberados.
+Apresentou-se um estudo da aplicação de técnicas tradicionais e de aprendizado profundo sobre os dados de treino do BraTS 2020 para previsão de sobrevivência, dividido em conjuntos de treino, validação e teste. Mostrou-se que é possível alcançar predições de sobrevivência com erro absoluto médio de aproximadamente 200 dias, com acurácia em níveis similares ao reportado por submissões passadas ao desafio.
 
+### Trabalhos Futuros
 
+Melhor normalização da saída da CNN e exploração de mais features para o modelo tradicional poderiam levar a melhor performance. Explorar balanceamento das classes com replicação dos dados também é uma possibilidade. Como trabalho futuro, precisa-se testar resultados nos dados de validação e teste do BraTS 2020, que ainda estão por ser liberados.
 
 ## Referências
-
-
 
 BREIMAN, Leo. Random forests. **Machine learning**, v. 45, n. 1, p. 5-32, 2001.
 
@@ -243,4 +245,20 @@ CRAMMER, Koby et al. Online passive-aggressive algorithms. **Journal of Machine 
 
 FAN, Rong-En et al. LIBLINEAR: A library for large linear classification. **Journal of machine learning research**, v. 9, n. Aug, p. 1871-1874, 2008.
 
-TODO referências CNN
+B. H. Menze, A. Jakab, S. Bauer, J. Kalpathy-Cramer, K. Farahani, J. Kirby, et al. "The Multimodal Brain Tumor Image Segmentation Benchmark (BRATS)", **IEEE Transactions on Medical Imaging** 34(10), 1993-2024 (2015) DOI: 10.1109/TMI.2014.2377694
+
+S. Bakas, H. Akbari, A. Sotiras, M. Bilello, M. Rozycki, J.S. Kirby, et al., "Advancing The Cancer Genome Atlas glioma MRI collections with expert segmentation labels and radiomic features", **Nature Scientific Data**, 4:170117 (2017) DOI: 10.1038/sdata.2017.117
+
+S. Bakas, M. Reyes, A. Jakab, S. Bauer, M. Rempfler, A. Crimi, et al., "Identifying the Best Machine Learning Algorithms for Brain Tumor Segmentation, Progression Assessment, and Overall Survival Prediction in the BRATS Challenge", **arXiv** preprint arXiv:1811.02629 (2018)
+
+LECUN, Yann; BENGIO, Yoshua; HINTON, Geoffrey. Deep learning. **nature**, v. 521, n. 7553, p. 436-444, 2015.
+
+GÓRRIZ, Marc et al. Assessing Knee OA Severity with CNN attention-based end-to-end architectures. **arXiv** preprint arXiv:1908.08856, 2019.
+
+LIU, Liyuan et al. On the variance of the adaptive learning rate and beyond. arXiv preprint **arXiv**:1908.03265, 2019.
+
+KINGMA, Diederik P.; BA, Jimmy. Adam: A method for stochastic optimization. **arXiv** preprint arXiv:1412.6980, 2014.
+
+ISENSEE, Fabian et al. No new-net. In: **International MICCAI Brainlesion Workshop**. Springer, Cham, 2018. p. 234-244.
+
+PASZKE, Adam et al. Pytorch: An imperative style, high-performance deep learning library. In: **Advances in neural information processing systems**. 2019. p. 8026-8037.
