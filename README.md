@@ -163,11 +163,11 @@ Um fator limitante para escolha do modelo de classificação empregado na análi
 
 
 
-(LEARD INICIO)
-
 
 
 ### Resultados dos modelos de classificação (descritores de imagem)
+
+
 
 | Modelo    | Acurácia Conjunto de dados 0                                 | Acurácia Conjunto de dados 1                                 | Acurácia Conjunto de dados 2                                 |
 | :-------- | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -177,7 +177,17 @@ Um fator limitante para escolha do modelo de classificação empregado na análi
 | **RF**    | *Treino*: 1,00 <br />*Validação*: 0,43<br />*Teste*: 0,37<br /> | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: 0,39<br /> | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: **0,41***<br /> |
 | **LF**    | *Treino*: 0,74 <br />*Validação*: 0,43<br />*Teste*: **0,47***<br /> | *Treino*: 0,72 <br />*Validação*: 0,43<br />*Teste*: **0,50***<br /> | *Treino*: 0,69 <br />*Validação*: 0,57<br />*Teste*: **0,43**<br /> |
 
-Leard, discutir resultados aqui
+
+
+| <img src="./assets/img/heatmap.png" alt="heat_map"  /> |
+| :----------------------------------------------------: |
+|    Figura X: Mapa de calor dos descritores obtidos     |
+
+
+
+
+
+
 
 (LEARD FIM)
 
