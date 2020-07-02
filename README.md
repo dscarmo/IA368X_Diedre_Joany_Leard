@@ -1,5 +1,3 @@
-# IA368X_Diedre_Joany_Leard
-
 # Survival Prediction of Patients with Brain Tumor
 # Predição de Sobrevivência em Pacientes com Tumor Cerebral
 
