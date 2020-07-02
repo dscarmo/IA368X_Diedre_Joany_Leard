@@ -32,14 +32,14 @@ Utilizar aprendizado de máquina tradicional e aprendizado de máquina profundo 
 
 |![data](./assets/img/input.png)|
 | :----------------------------------------------------------: |
-|**Figura 1**: Visualização dos dados do BraTS de um sujeito. Estes dados serão entradas aos métodos propostos. As quatro modalidades são apresentadas, em ordem: FLAIR, T1, T1 com Contraste e T2. Também são exibidas na linha de baixo anotações manuais, em ordem: fundo, edema (DE), non-enhancing tumor (NET) e enhancing tumor (ET)|
+|**Figura 1**: Visualização dos dados do BraTS de um sujeito. Estes dados serão entradas aos métodos propostos. As quatro modalidades são apresentadas, em ordem: FLAIR, T1, T1 com Contraste e T2. Também são exibidas na linha de baixo anotações manuais, em ordem: fundo, edema (DE), *non-enhancing tumor* (NET) e *enhancing tumor* (ET)|
 
 ## Recursos e Materiais
 
 O conjunto de dados utilizado, do desafio BraTS 2020, contém 369 sujeitos com exames de ressonância magnética de quatro modalidades: T1, pós-contraste T1, T2 e volumes FLAIR (veja a Figura 1). Todos os exames são de gliomas de baixo ou alto grau (LGG / HGG), adquiridos com diferentes protocolos clínicos e vários scanners de várias instituições. Todos os sujeitos têm segmentações manuais, realizadas por um a quatro avaliadores, seguindo o mesmo protocolo, com a segmentação resultante sendo aprovada por profissionais experientes. neurorradiologistas. As anotações compreendem o *enhancing tumor* (ET), o edema peritumoral (ED) e o núcleo tumoral necrótico e *non enhancing tumor* (NET), conforme descrito no último artigo de resumo do BraTS (CITAÇÃO).  Os dados fornecidos são distribuídos após o pré-processamento do BraTS: co-registro para o mesmo modelo anatômico, interpolação para a mesma resolução e remoção do crânio. Pré-processamento adicional segue o aplicado no trabalho do Isensee (CITAÇÃO): as imagens são subtraídas pela média e divididas pelo desvio padrão da região do cérebro e cortadas dentro do intervalo de -5 a 5. Por fim, elas são min-max normalizadas até o intervalo de 0 a 1. As anotações são organizados de maneira exclusiva, incluindo plano de fundo, resultando em quatro canais (plano de fundo, ED, NET e ET). Informações de idade e sobrevivência, o alvo desta pesquisa, também são incluídas.
 
 
-Este artigo dividirá os dados de treinamento do desafio (depois de aleatórizar com semente fixa) em uma abordagem de hold-out de 70% de treinamento, 10% de validação e 20% para o treinamento. Sujeitos que não tem informação de sobrevivência foram removidos, resultando em 169 treinamentos, 21 em validação e 46 sujeitos de teste de um total de 236 sujeitos com informação de sobrevivência. Todos esses sujeitos tem Glioma do tipo HGG.
+Este artigo dividirá os dados de treinamento do desafio (depois de randomizar com semente fixa) em uma abordagem de *hold-out* de 70% de treinamento, 10% de validação e 20% para o treinamento. Sujeitos que não tem informação de sobrevivência foram removidos, resultando em 169 treinamentos, 21 em validação e 46 sujeitos de teste de um total de 236 sujeitos com informação de sobrevivência. Todos esses sujeitos tem Glioma do tipo HGG.
 
 ## Ferramentas e Bibliotecas
 A tabela abaixo contêm ferramentas e bibliotecas utilizadas na implementação deste trabalho.
@@ -67,7 +67,7 @@ The used environment is the environment provided by Google Colaboratory. Note th
 
 Esta seção contêm explanações dos dois principais caminhos metodológicos seguidos por esse trabalho: utilização de aprendizado de máquina tradicional e aprendizado profundo.
 
-Seguindo o padrão de avaliação do BraTS, a varíavel alvo de sobrevivência, em dias, é transformada em categórica para extração de métricas de classificação como acurácia. A conversão segue a Tabela abaixo:
+Seguindo o padrão de avaliação do BraTS, a variável alvo de sobrevivência, em dias, é transformada em categórica para extração de métricas de classificação como acurácia. A conversão segue a Tabela abaixo:
 
 | Classe           | Sobrevivência         |
 | ---              | ---                   |
@@ -129,9 +129,9 @@ Especificamente para o experimento com a CNN3DAtt, as quatro anotações foram t
 | Tumor Core     |  NET + ET |
 | ET  |  ET      |
 
-Tanto as imagens de MRI quanto as anotações do tumor são inseridas em conjunto, fundidas com uso de múltiplos canais. Quatro modalidades de MRI mais três canais da nova anotação resultam em sete canais de entrada. Data *augmentation* (aumentação de dados) foi utilizado na forma de patches aleatórios 7x128x128x128 em tempo de treinamento, e variação aleatória de intensidade de 0.1. Em tempo de predição (validação ou teste), crops centrais 7x128x128x128 são utilizados. A função de perda escolhida foi a Smooth L1 Loss (citação), onde uma perda de erro absoluto linear (L1) é realizada enquanto o valor é maior que 1.0, e MSE é utilizada em valores menor que 1.0. Devido aos altos valores de sobrevivência em dias, efetivamente a perda se torna L1 Loss. Valores de loss na casa das centenas são esperados, devido a não realizarmos nenhuma normalização neste caso. Experimentos iniciais determinaram um número de épocas de 300. Weight Decay é usado no otimizador com valor de 1e-05. *Batch size* é fixado no máximo cabendo em uma GPU de 12 GB de memória, 3. Experimentos com treinamento sobre mixed-precision pioraram o resultado.
+Tanto as imagens de MRI quanto as anotações do tumor são inseridas em conjunto, fundidas com uso de múltiplos canais. Quatro modalidades de MRI mais três canais da nova anotação resultam em sete canais de entrada. Data *augmentation* (aumentação de dados) foi utilizado na forma de patches aleatórios 7x128x128x128 em tempo de treinamento, e variação aleatória de intensidade de 0.1. Em tempo de predição (validação ou teste), *crops* centrais 7x128x128x128 são utilizados. A função de perda escolhida foi a Smooth L1 Loss (citação), onde uma perda de erro absoluto linear (L1) é realizada enquanto o valor é maior que 1.0, e MSE é utilizada em valores menor que 1.0. Devido aos altos valores de sobrevivência em dias, efetivamente a perda se torna L1 *Loss*. Valores de *loss* na casa das centenas são esperados, devido a não realizarmos nenhuma normalização neste caso. Experimentos iniciais determinaram um número de épocas de 300. *Weight Decay* é usado no otimizador com valor de 1e-05. *Batch size* é fixado no máximo cabendo em uma GPU de 12 GB de memória, 3. Experimentos com treinamento sobre *mixed-precision* pioraram o resultado.
 
-Os experimentos principais apresentados aqui envolveram experimentar com learning rate e otimizador, entre Adam e RAdam. O melhor conjunto de hiperparâmetros de treinamento e validação foi escolhido para ser avaliado no conjunto de testes. Diversos experimentos realizados que não chegaram à convergência ou não tiveram impacto significativo, não serão apresentados. Finalmente, os mapas de atenção são visualizados para verificar em quais localizações aproximadas a rede esta dando mais "atenção".
+Os experimentos principais apresentados aqui envolveram experimentar com *learning rate* e otimizador, entre Adam e RAdam. O melhor conjunto de hiperparâmetros de treinamento e validação foi escolhido para ser avaliado no conjunto de testes. Diversos experimentos realizados que não chegaram à convergência ou não tiveram impacto significativo, não serão apresentados. Finalmente, os mapas de atenção são visualizados para verificar em quais localizações aproximadas a rede esta dando mais "atenção".
 
 
 
@@ -189,7 +189,7 @@ A tabela abaixo apresenta experimento de hiperparâmetros sobre a CNN3DAtt selec
 | 3 |    RAdam   |   5e-05       |      **227**          |
 | 4 |    RAdam   |   1e-05       |      260              |
 
-Os gráficos abaixo apresentam comparações da convergência e grau de overfit da CNN3DAtt para os modelos 1 a 5.
+Os gráficos abaixo apresentam comparações da convergência e grau de *overfit* da CNN3DAtt para os modelos 1 a 5.
 
 |    ![loss](./assets/img/loss_curve.png "Visualização de Atenção")     |
 | :----------------------------------------------------------: |
