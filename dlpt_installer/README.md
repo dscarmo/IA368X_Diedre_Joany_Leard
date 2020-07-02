@@ -1,0 +1,1 @@
+Instalador (.whl) e código comprimido (.tar.gz) da biblioteca pessoal DLPT do Diedre.

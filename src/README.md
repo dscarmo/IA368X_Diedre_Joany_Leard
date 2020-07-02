@@ -13,4 +13,6 @@ Dos arquivos que serão encontrados na pasta codebase, é importante citar:
 
 **datasets/brats_preprocess.py**:  Preprocessamento sobre arquivos originais .nii.gz, gerando arquivos processados .npz.
 
+Outros códigos importados da biblioteca "DLPT" podem ser visualizados em dlpt_installer/DLPT-0.0.1.tar.gz. DLPT consiste de uma biblioteca pessoal do Diedre de códigos para deep learning.
+
 

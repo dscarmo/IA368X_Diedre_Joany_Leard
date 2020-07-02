@@ -11,7 +11,7 @@ The Brain Tumor Segmentation Challenge (BraTS) challenge directly contributes to
 
 ## Equipe
 Diedre Santos do Carmo - 211492\
-Joany - ``\
+Joany do Socorro Santa Rosa Rodrigues - 264440\
 Leard de Oliveira Fernandes - 98413
 
 ## Vídeo do Projeto
@@ -129,9 +129,9 @@ Especificamente para o experimento com a CNN3DAtt, as quatro anotações foram t
 | Tumor Core     |  NET + ET |
 | ET  |  ET      |
 
-Tanto as imagens de MRI quanto as anotações do tumor são inseridas em conjunto, fundidas com uso de múltiplos canais. Quatro modalidades de MRI mais três canais da nova anotação resultam em sete canais de entrada. Data augmentation foi utilizado na forma de patches aleatórios 7x128x128x128 em tempo de treinamento, e variação aleatória de intensidade de 0.1. Em tempo de predição (validação ou teste), crops centrais 7x128x128x128 são utilizados. A função de perda escolhida foi a Smooth L1 Loss (citação), onde uma perda de erro absoluto linear (L1) é realizada enquanto o valor é maior que 1.0, e MSE é utilizada em valores menor que 1.0. Devido aos altos valores de sobrevivência em dias, efetivamente a perda se torna L1 Loss. Valores de loss na casa das centenas são esperados, devido a não realizarmos nenhuma normalização neste caso. Experimentos iniciais determinaram um número de épocas de 300. Weight Decay é usado no otimizador com valor de 1e-05.
+Tanto as imagens de MRI quanto as anotações do tumor são inseridas em conjunto, fundidas com uso de múltiplos canais. Quatro modalidades de MRI mais três canais da nova anotação resultam em sete canais de entrada. Data augmentation (aumentação de dados) foi utilizado na forma de patches aleatórios 7x128x128x128 em tempo de treinamento, e variação aleatória de intensidade de 0.1. Em tempo de predição (validação ou teste), crops centrais 7x128x128x128 são utilizados. A função de perda escolhida foi a Smooth L1 Loss (citação), onde uma perda de erro absoluto linear (L1) é realizada enquanto o valor é maior que 1.0, e MSE é utilizada em valores menor que 1.0. Devido aos altos valores de sobrevivência em dias, efetivamente a perda se torna L1 Loss. Valores de loss na casa das centenas são esperados, devido a não realizarmos nenhuma normalização neste caso. Experimentos iniciais determinaram um número de épocas de 300. Weight Decay é usado no otimizador com valor de 1e-05. Batch size é fixado no máximo cabendo em uma GPU de 12 GB de memória, 3. Experimentos com treinamento sobre mixed-precision pioraram o resultado.
 
-Os experimentos principais apresentados aqui envolveram experimentar com alguns hiperparâmetros de treinamento. Especificamente, batch size, learning rate e otimizador, entre Adam e RAdam. O melhor conjunto de hiperparâmetros de treinamento foi escolhido para ser avaliado no conjunto de testes. Diversos experimentos realizados que não chegaram à convergência ou não tiveram impacto significativo, não serão apresentados. Finalmente, os mapas de atenção são visualizados para verificar em quais localizações aproximadas a rede esta dando mais "atenção".
+Os experimentos principais apresentados aqui envolveram experimentar com learning rate e otimizador, entre Adam e RAdam. O melhor conjunto de hiperparâmetros de treinamento e validação foi escolhido para ser avaliado no conjunto de testes. Diversos experimentos realizados que não chegaram à convergência ou não tiveram impacto significativo, não serão apresentados. Finalmente, os mapas de atenção são visualizados para verificar em quais localizações aproximadas a rede esta dando mais "atenção".
 
 
 
@@ -143,18 +143,12 @@ A seguir, links que levam as implementações da metodologia reportada neste rel
 **[Notebook CNN](https://colab.research.google.com/drive/1IY-CMSZV-zriZP7jOq61AmR4f66XeqtI?usp=sharing)**
 
 
-
-
-
-
 ## Evolução do Projeto
-<Relate a evolução do projeto: possíveis problemas enfrentados e possíveis mudanças de trajetória. Relatar o processo para se alcançar os resultados é tão importante quanto os resultados.>
-
-
+O processamento correto dos dados acumulou boa parte do desenvolvimento desse projeto, devido ao peso e complexidade de lidar com dados de quatro dimensões. Erros no processamento fizeram alguns experimentos iniciais serem perdidos. Especial atenção foi prestada a partir desses erros para que a divisão e processamento estivessem corretos, notando que o processamento de centenas de volumes tri-dimensionais também requer alto poder computacional.
 
 Um fator limitante para escolha do modelo de classificação empregado na análise dos descritores de imagem foi relacionado ao tamanho amostral dos dados de treino, validação e teste. Uma vez que os dados disponibilizados estavam limitados ao conjunto disponibilizado pelo desafio BraTS. Dessa forma, optou-se por utilizar diferentes modelos e após, treinamento e validação, realizar a avaliação dos dados de testes em todos os modelos. Além disso, procurou-se verificar diferentes conjuntos de dados em função da resolução de processamento dos descritores. Em função da limitação de Hardware e tempo de processamento, os dois principais descritores (HOG e LBP) apresentados na literatura foram utilizados.
 
-
+Em termos da aproximação baseada em aprendizado profundo, a maior limitação da realização de experimentos adicionais de hiperparâmetros envolveram a demora em encontrar um ajuste de parâmetros que convergisse. O problema aparenta ser de dificíl conversão, especialmente pela decisão de treinar diretamente sobre o valor de sobrevivência em dias. Provavelmente com algum tipo de normalização da saída a convergência seria mais fácil, o que é planejado para trabalhos futuros relacionados.
 
 ## Resultados e Discussão
 
@@ -187,17 +181,18 @@ Abaixo temos um mapa de calor dos descritores de imagem obtidos, é possível ve
 
 A tabela abaixo apresenta experimento de hiperparâmetros sobre a CNN3DAtt selecionados. Valores de Loss menores são melhores. Lembre-se que esse valor exprime essencialmente a média do erro entre a predição de sobrevivência em dias e a sobrevivência real. O tempo médio de execução de um experimento foi em média 24 horas.
 
-|ID | Batch Size | Otimizador | Learning Rate | Melhor Loss Validação |
-|---| ---        | ---        | ---           | ---                   |
-| 1 |     3      |    Adam    |   1e-04       |      285              |
-| 2 |     3      |    RAdam   |   1e-04       |      244              |
-| 3 |     3      |    RAdam   |   5e-05       |      **227**          |
-| 4 |     4      |    RAdam   |   5e-05       |      243              |
-| 5 |     3      |    RAdam   |   1e-05       |      260              |
+|ID | Otimizador | Learning Rate | Melhor Loss Validação (L1) |
+|---| ---        | ---           | ---                   |
+| 1 |    Adam    |   1e-04       |      285              |
+| 2 |    RAdam   |   1e-04       |      244              |
+| 3 |    RAdam   |   5e-05       |      **227**          |
+| 4 |    RAdam   |   1e-05       |      260              |
 
-Os gráficos abaixo apresentam comparações da convergência e grau de overfit da CNN3DAtt para os modelos 1 a 4.
+Os gráficos abaixo apresentam comparações da convergência e grau de overfit da CNN3DAtt para os modelos 1 a 5.
 
-**TODO graficos convergência CNN**
+|    ![loss](./assets/img/loss_curve.png "Visualização de Atenção")     |
+| :----------------------------------------------------------: |
+| **Figura X:** Convergência da Loss para treino e validação dos modelos 1 a 5. Linhas pontilhadas são curvas de treino, e contínuas de validação. Observa-se o mínimo de validação do melhor modelo, 3, em vermelho.|
 
 O modelo 3, com resultados em negrito, foi selecionado como melhor modelo para avaliação mais aprofundada e resultados de teste, incluindo avaliação de acurácia (ACC) de classificação sobre as 3 classes definidas previamente, e erro médio quadrático, presentes na tabela abaixo.
 

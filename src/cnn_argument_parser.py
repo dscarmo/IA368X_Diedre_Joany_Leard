@@ -4,12 +4,9 @@ import pickle
 parser = argparse.ArgumentParser()
 parser.add_argument(dest="desc", type=str)
 
-# Variables to experiment with
 parser.add_argument("-bs", type=int, required=True)
 parser.add_argument("-opt", type=str, required=True)
 parser.add_argument("-precision", type=int, required=True)
-
-# Fixed arguments
 parser.add_argument("-debug", action="store_true")
 parser.add_argument("-lr", type=float, default=0.0005)
 parser.add_argument("-wd", type=float, default=1e-5)
