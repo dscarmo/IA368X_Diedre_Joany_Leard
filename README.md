@@ -10,10 +10,8 @@ O desafio Brain Tumor Segmentation Challenge (BraTS) contribui diretamente na pr
 The Brain Tumor Segmentation Challenge (BraTS) challenge directly contributes to the provision of public MRI data for brain tumor research, with several tasks surrounding the main task of tumor segmentation. One of these tasks is the use of segmentations to study the possibility of predicting patient survival. The diagnosis of Cerebral Tumor often accompanies a prediction of the patient's lifetime, where the accuracy of this prediction by the physician can improve the quality of life before death, also called quality of death. This work intends to experiment with the public data of BraTS, in order to predict the survival time of patients with the least possible error, using the manual segmentations provided. We compare traditional machine learning models and Deep Learning. The data includes notes on patient's age survival in days, which is used as a reference. The best results found were 0.66 accuracy, assessing survival categories.
 
 ## Equipe
-Diedre Santos do Carmo - 211492
-
-Joany do Socorro Santa Rosa Rodrigues - 264440
-
+Diedre Santos do Carmo - 211492\
+Joany do Socorro Santa Rosa Rodrigues - 264440\
 Leard de Oliveira Fernandes - 98413
 
 ## Vídeo do Projeto
