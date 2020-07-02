@@ -1,0 +1,1 @@
+Aqui estão os pesos do melhor modelo CNN3DAtt

@@ -11,7 +11,7 @@ The Brain Tumor Segmentation Challenge (BraTS) challenge directly contributes to
 
 ## Equipe
 Diedre Santos do Carmo - 211492\
-Joany - ``\
+Joany do Socorro Santa Rosa Rodrigues - 264440\
 Leard de Oliveira Fernandes - 98413
 
 ## Vídeo do Projeto
@@ -30,8 +30,9 @@ A proposta deste projeto é avaliar a performance de métodos de aprendizado de 
 ## Objetivos do projeto
 Utilizar aprendizado de máquina tradicional e aprendizado de máquina profundo na tentativa de predizer tempo de sobrevivência de pacientes com Glioma a partir dos dados de ressonância magnética e anotações manuais de tumores do BraTS 2020.
 
-![data](./assets/img/input.png)
-*Figura 1: Visualização dos dados do BraTS de um sujeito. Estes dados serão entradas aos métodos propostos. As quatro modalidades são apresentadas, em ordem: FLAIR, T1, T1 com Contraste e T2. Também são exibidas na linha de baixo anotações manuais, em ordem: fundo, edema (DE), non-enhancing tumor (NET) e enhancing tumor (ET)*
+|![data](./assets/img/input.png)|
+| :----------------------------------------------------------: |
+|**Figura 1**: Visualização dos dados do BraTS de um sujeito. Estes dados serão entradas aos métodos propostos. As quatro modalidades são apresentadas, em ordem: FLAIR, T1, T1 com Contraste e T2. Também são exibidas na linha de baixo anotações manuais, em ordem: fundo, edema (DE), non-enhancing tumor (NET) e enhancing tumor (ET)|
 
 ## Recursos e Materiais
 
@@ -66,14 +67,13 @@ The used environment is the environment provided by Google Colaboratory. Note th
 
 Esta seção contêm explanações dos dois principais caminhos metodológicos seguidos por esse trabalho: utilização de aprendizado de máquina tradicional e aprendizado profundo.
 
-Seguindo o padrão de avaliação do BraTS, a varíavel alvo de sobrevivência, em dias, é transformada em categórica para extração de métricas de classificação como acurácia. A conversão segue a Tabela (?):
+Seguindo o padrão de avaliação do BraTS, a varíavel alvo de sobrevivência, em dias, é transformada em categórica para extração de métricas de classificação como acurácia. A conversão segue a Tabela abaixo:
 
 | Classe           | Sobrevivência         |
 | ---              | ---                   |
 | Short-survivor   |  < 300 dias           |
 | Mid-survivor     |>= 300 dias < 450 dias |
 | Long-survivor    |     >= 450 dias       |
-*Tabela (?): Esquema de conversão de dias de sobrevivência para variável categórica.*
 
 No método baseado em CNN, também é avaliada o MSE (mean squared error ou erro quadrátivo médio) comparado diretamente os valores de sobrevivência preditos com a anotação. No método tradicional, a otimização é realizada diretamente sobre as categorias.
 
@@ -116,23 +116,22 @@ A partir dos descritores de imagem processados e dos dados de idade do sujeito, 
 
 Modelos de aprendizado profundo, especificamente redes neurais concolucionais (CNNs) contêm uma quantidade significativamente maior de parâmetros que o contido em redes neurais tradicionais. A rede tem capacidade de aprender diretamente dos dados, como dados de imagem, não somente de duas dimensões até de três dimensões. Em um breve resumo, um processo de otimização utilizando gradientes de uma função de perda que quantifica a performance da rede, atualiza todos os pesos das convoluções realizadas pela rede, que são seguidas de operações não lineares.
 
-![arch](/assets/img/arch.png) TODO
+![arch](/assets/img/arch.png) **TODO**
 *Figura (?): Diagrama da arquitetura da CNN3DAtt.*
 
-A arquitetura da rede utilizada aqui, chamada de CNNAtt3D, é inspirada em uma CNN baseada em mecanismo de atenção (CITAÇÃO). A rede produz de forma não supervisionadas mapeamentos em duas dimensões, utilizando-se da função de ativação Sigmoid, que funcionam como um mapa de calor e um "portão" que deixa passar somente as features convolucionais desejadas pela otimização. Em resumo a arquitetura realiza camadas convolucionais seguidas de operações não-lineares. Três camadas de atenção convergem em camadas totalmente conectadas. A conversão de features 2D para features 1D é realizada com Global Average Pooling, resultando em um valor de média por canal da saída do módulo de atenção. O valor de idade é adicionado nesta fase como um neurônio extra. A saída final consiste de um único neurônio.Este neurônio de saída é utilizado como ativação diretamente de dias de sobrevivência. A ativação deste neurônio é limitada entre 1 e 2000, utilizando-se de uma ativação Sigmoid. O intervalo foi escolhido baseando-se no intervalo observado nos datasets de treino e validação.
+A arquitetura da rede utilizada aqui, chamada de CNNAtt3D, é inspirada em uma CNN baseada em mecanismo de atenção (CITAÇÃO), de onde ela foi adaptada para convoluções 3D, onde a original é 2D. O número de canais, naturalmente diferente ao transformar de 2D para 3D, foi determinado por experimentos iniciais. A rede produz de forma não supervisionadas mapeamentos posicionais chamados de mapas de atençao, utilizando-se da função de ativação Sigmoid, que funcionam como um mapa de calor e um "portão" que deixa passar somente as features convolucionais desejadas pela otimização, naquela posição. Em resumo a arquitetura realiza camadas convolucionais seguidas de operações não-lineares, três camadas de atenção convergem em camadas totalmente conectadas. A conversão de features 3D para features 1D é realizada com Global Average Pooling, resultando em um valor de média por canal na saída do módulo de atenção. O valor de idade é adicionado nesta fase como um neurônio extra. A saída final consiste de um único neurônio.Este neurônio de saída é utilizado como ativação diretamente de dias de sobrevivência. A ativação deste neurônio é limitada entre 1 e 2000, utilizando-se de uma ativação Sigmoid. O intervalo foi escolhido baseando-se no intervalo observado nos datasets de treino e validação.
 
-Especificamente para o experimento com a CNN3DAtt, as quatro anotações foram transformadas em três anotações cumulativas para economia de memória, seguindo a Tabela (?):
+Especificamente para o experimento com a CNN3DAtt, as quatro anotações foram transformadas em três anotações cumulativas para economia de memória, seguindo a tabela abaixo:
 
 | Nova anotação    | Composta de       |
 | ---              | ---                   |
 | Whole Tumor    |  ED + NET + ET           |
 | Tumor Core     |  NET + ET |
 | ET  |  ET      |
-*Tabela ?: Esse esquema de anotação elimina o canal do background, focando completamente no tumor.*
 
-Tanto as imagens de MRI quanto as anotações do tumor são inseridas em conjunto, fundidas com uso de múltiplos canais. Quatro modalidades de MRI mais três canais da nova anotação resultam em sete canais de entrada. Data augmentation foi utilizado na forma de patches aleatórios 7x128x128x128 em tempo de treinamento, e variação aleatória de intensidade de 0.1. Em tempo de predição (validação ou teste), crops centrais 7x128x128x128 são utilizados. A função de perda escolhida foi a Smooth L1 Loss (citação), onde uma perda de erro absoluto linear (L1) é realizada enquanto o valor é maior que 1.0, e MSE é utilizada em valores menor que 1.0. Devido aos altos valores de sobrevivência em dias, efetivamente a perda se torna L1 Loss.
+Tanto as imagens de MRI quanto as anotações do tumor são inseridas em conjunto, fundidas com uso de múltiplos canais. Quatro modalidades de MRI mais três canais da nova anotação resultam em sete canais de entrada. Data augmentation (aumentação de dados) foi utilizado na forma de patches aleatórios 7x128x128x128 em tempo de treinamento, e variação aleatória de intensidade de 0.1. Em tempo de predição (validação ou teste), crops centrais 7x128x128x128 são utilizados. A função de perda escolhida foi a Smooth L1 Loss (citação), onde uma perda de erro absoluto linear (L1) é realizada enquanto o valor é maior que 1.0, e MSE é utilizada em valores menor que 1.0. Devido aos altos valores de sobrevivência em dias, efetivamente a perda se torna L1 Loss. Valores de loss na casa das centenas são esperados, devido a não realizarmos nenhuma normalização neste caso. Experimentos iniciais determinaram um número de épocas de 300. Weight Decay é usado no otimizador com valor de 1e-05. Batch size é fixado no máximo cabendo em uma GPU de 12 GB de memória, 3. Experimentos com treinamento sobre mixed-precision pioraram o resultado.
 
-Experimentos envolveram experimentar com alguns hiperparâmetros de treinamento e com a quantidade de canais das camadas da rede. Especificamente, batch size, learning rate, otimizador, precisão(treinamento com mixed-precision ou full-precision utilizando-se da biblioteca AMP (CITAÇÃO)) e a quantidade de canais por camada determinada por um fator compartilhado. O melhor conjunto de hiperparâmetros de treinamento foi escolhido para ser avaliado no conjunto de testes. Diversos experimentos que não chegaram a convergência não serão apresentados. Finalmente, os mapas de atenção são visualizados para verificar em quais localizações aproximadas a rede esta dando mais "atenção".
+Os experimentos principais apresentados aqui envolveram experimentar com learning rate e otimizador, entre Adam e RAdam. O melhor conjunto de hiperparâmetros de treinamento e validação foi escolhido para ser avaliado no conjunto de testes. Diversos experimentos realizados que não chegaram à convergência ou não tiveram impacto significativo, não serão apresentados. Finalmente, os mapas de atenção são visualizados para verificar em quais localizações aproximadas a rede esta dando mais "atenção".
 
 
 
@@ -140,33 +139,23 @@ Experimentos envolveram experimentar com alguns hiperparâmetros de treinamento 
 
 A seguir, links que levam as implementações da metodologia reportada neste relatório. Os notebooks são pontos de entrada para importação de outros códigos vindo de outras bibliotecas ou scripts presentes no Drive Compartilhado.
 
-**[Notebook extração de features](./notebooks/Process_and_Extract_Features_MRI.ipynb) **
+**[Notebook extração de features](./notebooks/Process_and_Extract_Features_MRI.ipynb)**
 
 **[Notebook CNN](https://colab.research.google.com/drive/1IY-CMSZV-zriZP7jOq61AmR4f66XeqtI?usp=sharing)**
 
 
-
-
-
-
 ## Evolução do Projeto
-<Relate a evolução do projeto: possíveis problemas enfrentados e possíveis mudanças de trajetória. Relatar o processo para se alcançar os resultados é tão importante quanto os resultados.>
-
-
+O processamento correto dos dados acumulou boa parte do desenvolvimento desse projeto, devido ao peso e complexidade de lidar com dados de quatro dimensões. Erros no processamento fizeram alguns experimentos iniciais serem perdidos. Especial atenção foi prestada a partir desses erros para que a divisão e processamento estivessem corretos, notando que o processamento de centenas de volumes tri-dimensionais também requer alto poder computacional.
 
 Um fator limitante para escolha do modelo de classificação empregado na análise dos descritores de imagem foi relacionado ao tamanho amostral dos dados de treino, validação e teste. Uma vez que os dados disponibilizados estavam limitados ao conjunto disponibilizado pelo desafio BraTS. Dessa forma, optou-se por utilizar diferentes modelos e após, treinamento e validação, realizar a avaliação dos dados de testes em todos os modelos. Além disso, procurou-se verificar diferentes conjuntos de dados em função da resolução de processamento dos descritores. Em função da limitação de Hardware e tempo de processamento, os dois principais descritores (HOG e LBP) apresentados na literatura foram utilizados.
 
-
+Em termos da aproximação baseada em aprendizado profundo, a maior limitação da realização de experimentos adicionais de hiperparâmetros envolveram a demora em encontrar um ajuste de parâmetros que convergisse. O problema aparenta ser de dificíl conversão, especialmente pela decisão de treinar diretamente sobre o valor de sobrevivência em dias. Provavelmente com algum tipo de normalização da saída a convergência seria mais fácil, o que é planejado para trabalhos futuros relacionados.
 
 ## Resultados e Discussão
 
+Resultados e discussão das duas abordagens são apresentados separadamente nas proximas seções.
 
-
-
-
-
-
-### Resultados dos modelos de classificação (descritores de imagem)
+### Resultados dos modelos de classificação baseadoes em descritores de imagem
 
 Todos os parâmetros escolhidos nos modelos avaliados passaram por validação cruzada (*20-fold cross validation*), ao final dos treinamentos os mesmos foram avaliados nos três conjuntos de teste para as três classes de sobrevivência (curta, média e longa). A melhor acurácia foi obtida no modelo PAC (Classificador passivo agressivo), alcançando 59% de acurácia no conjunto de características com menor resolução dos descritores de imagem obtidos.
 
@@ -178,7 +167,7 @@ Todos os parâmetros escolhidos nos modelos avaliados passaram por validação c
 | **RF**    | *Treino*: 1,00 <br />*Validação*: 0,43<br />*Teste*: 0,37    | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: 0,39    | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: **0,41*** |
 | **LF**    | *Treino*: 0,74 <br />*Validação*: 0,43<br />*Teste*: **0,47*** | *Treino*: 0,72 <br />*Validação*: 0,43<br />*Teste*: **0,50*** | *Treino*: 0,69 <br />*Validação*: 0,57<br />*Teste*: **0,43** |
 
-Contudo é necessário avaliar a limitação do tamanho da base de dados e da distribuição de classes de sobrevivência. O que poderia explicar o baixo desempenho do modelo SVM na validação e teste, além de um possível *overfit* (apesar da validação cruzada durante o treinamento). Apesar do uso limitado de descritores de imagem (volume, HOG e LBP), o número de características é próximo ao tamanho do conjunto de dados, o que torna difícil sua análise quanto a robustez  (o que é significante no conjunto de treino, pode não ser na validação e testes). 
+Contudo é necessário avaliar a limitação do tamanho da base de dados e da distribuição de classes de sobrevivência. O que poderia explicar o baixo desempenho do modelo SVM na validação e teste, além de um possível *overfit* (apesar da validação cruzada durante o treinamento). Apesar do uso limitado de descritores de imagem (volume, HOG e LBP), o número de características é próximo ao tamanho do conjunto de dados, o que torna difícil sua análise quanto a robustez  (o que é significante no conjunto de treino, pode não ser na validação e testes).
 
 (NÃO SEI SE FICA OU SE TIRA)
 
@@ -189,18 +178,44 @@ Abaixo temos um mapa de calor dos descritores de imagem obtidos, é possível ve
 |    Figura X: Mapa de calor dos descritores obtidos     |
 
 
+### Resultados Aprendizado Profundo
 
+A tabela abaixo apresenta experimento de hiperparâmetros sobre a CNN3DAtt selecionados. Valores de Loss menores são melhores. Lembre-se que esse valor exprime essencialmente a média do erro entre a predição de sobrevivência em dias e a sobrevivência real. O tempo médio de execução de um experimento foi em média 24 horas.
 
+|ID | Otimizador | Learning Rate | Melhor Loss Validação (L1) |
+|---| ---        | ---           | ---                   |
+| 1 |    Adam    |   1e-04       |      285              |
+| 2 |    RAdam   |   1e-04       |      244              |
+| 3 |    RAdam   |   5e-05       |      **227**          |
+| 4 |    RAdam   |   1e-05       |      260              |
 
-TODO tabela resultados CNN
+Os gráficos abaixo apresentam comparações da convergência e grau de overfit da CNN3DAtt para os modelos 1 a 5.
 
-TODO graficos convergência CNN
+|    ![loss](./assets/img/loss_curve.png "Visualização de Atenção")     |
+| :----------------------------------------------------------: |
+| **Figura X:** Convergência da Loss para treino e validação dos modelos 1 a 5. Linhas pontilhadas são curvas de treino, e contínuas de validação. Observa-se o mínimo de validação do melhor modelo, 3, em vermelho.|
 
-TODO visualização atenção CNN
+O modelo 3, com resultados em negrito, foi selecionado como melhor modelo para avaliação mais aprofundada e resultados de teste, incluindo avaliação de acurácia (ACC) de classificação sobre as 3 classes definidas previamente, e erro médio quadrático, presentes na tabela abaixo.
+
+| Dataset   | MSE | ACC  |
+| ---       | ---   |  --- |
+| Validação |118352 | 0.66 |
+| Teste     |129667 | 0.54 |
+
+Embora os resultados não aparentem ser bons inicialmente, é importante notar que o desempenho de validação alcançado por métodos submetidos ao último desafio de 2019 variou entre 0.2 e 0.65, com MSE entre 80000 e 3000000 ou mais. Os valores não são diretamente comparáveis devido a dois fatores: os conjuntos de dados são diferentes; e o BraTS requer que a os autores utilizem suas próprias segmentações como entrada da predição de sobrevivência, o que não foi feito neste trabalho. Utilizamos-nos das anotações manuais, o que pode ter trazido uma vantagem. Devido a esses fatores, não faremos comparações diretas com outros métodos da literatura.
+
+A Figura X visualiza o mapa de atenção da CNN3DAtt como uma imagem devido a sua propriedade de possuir um canal ativado entre 1 e 0, como descrito na metodologia. Valores de cor foram adicionados para melhor visualização utilizando o colormap "afmhot" do matplotlib, e somente valores entre 0.8 e 1.0 são incluídos para maior contraste.
+
+|    ![att](./assets/img/att.png "Visualização de Atenção")     |
+| :----------------------------------------------------------: |
+| **Figura X:** Visualização do primeiro mapa de atenção comparada à fatias das quatro modalidades correspondentes.|
+
+Note como as ativações maiores do mapa de atenção estão coincidindo com a área do tumor, mostrando que a rede está levando em maior consideração features convolucionais aprendidas próximas a essa área.
 
 
 ## Conclusões
-<Apresente aqui as conclusões finais do trabalho e as lições aprendidas.>
+
+Apresentou-se um estudo da aplicação de técnicas tradicionais e de aprendizado profundo sobre os dados de treino do BraTS 2020 para previsão de sobrevivência, dividido em conjuntos de treino, validação e teste. Mostrou-se que é possível alcançar predições de sobrevivência com erro absoluto médio de aproximadamente 200 dias, com acurácia em níveis similares ao reportado por submissões passadas ao desafio. Como trabalho futuro, precisa-se testar resultados nos dados de validação e teste do BraTS 2020, que ainda estão por ser liberados.
 
 
 
