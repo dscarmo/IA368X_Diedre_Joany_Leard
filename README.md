@@ -162,7 +162,7 @@ Todos os parâmetros escolhidos nos modelos avaliados passaram por validação c
 | Modelo    | Acurácia conjunto de características 0                       | Acurácia conjunto de características 1                       | Acurácia conjunto de características 2                       |
 | :-------- | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | **SVM**   | *Treino*: 0,93 <br />*Validação*: 0,57<br />*Teste*: 0,41    | *Treino*: 0,93 <br />*Validação*: 0,43<br />*Teste*: **0,48\**** | *Treino*: 0,55 <br />*Validação*: 0,52<br />*Teste*: 0,39    |
-| **nuSVM** | *Treino*: 0,91 <br />*Validação*: 0,52 <br />*Teste*: 0,43   | *Treino*: 0,90 <br />*Validação*: 0,38<br />*Teste*: 0,46    | *Treino*: 0,91 <br />*Validação*: 0,57<br />*Teste*: 0,33    |
+| **nuSVC** | *Treino*: 0,91 <br />*Validação*: 0,52 <br />*Teste*: 0,43   | *Treino*: 0,90 <br />*Validação*: 0,38<br />*Teste*: 0,46    | *Treino*: 0,91 <br />*Validação*: 0,57<br />*Teste*: 0,33    |
 | **PAC**   | *Treino*: 0,67 <br />*Validação*: 0,38<br />*Teste*: **0,59** | *Treino*: 0,63 <br />*Validação*: 0,52<br />*Teste*: **0,54** | *Treino*: 0,63 <br />*Validação*: 0,43<br />*Teste*: 0,33    |
 | **RF**    | *Treino*: 1,00 <br />*Validação*: 0,43<br />*Teste*: 0,37    | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: 0,39    | *Treino*: 1,00 <br />*Validação*: 0,48<br />*Teste*: **0,41*** |
 | **LR**    | *Treino*: 0,74 <br />*Validação*: 0,43<br />*Teste*: **0,47*** | *Treino*: 0,72 <br />*Validação*: 0,43<br />*Teste*: **0,50*** | *Treino*: 0,69 <br />*Validação*: 0,57<br />*Teste*: **0,43** |
